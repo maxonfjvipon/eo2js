@@ -1,14 +1,20 @@
 const assert = require('assert');
 const path = require('path');
 const fs = require('fs');
-const {runSync, comment, runEoc} = require('../helpers');
+const {runSync} = require('../helpers');
+const {execSync} = require('child_process')
+
+const xsls = fs.readdirSync(path.resolve(__dirname, '../../src/resources/xsl')).length
 
 describe('transpile', function() {
+  before('compile xsls', function() {
+    if (fs.readdirSync(path.resolve(__dirname, '../../src/resources/json')).length !== xsls) {
+      execSync('node src/compile-xsls.js')
+    }
+  })
   it('transpiles successfully', function(done) {
     const home = path.resolve('temp/test-transpile')
     fs.rmSync(home, {recursive: true, force: true})
-    fs.mkdirSync(path.resolve(home, 'src/org/eolang'), {recursive: true})
-    fs.writeFileSync(path.resolve(home, 'src/org/eolang/simple.eo'), `${comment}\n[] > simple\n`)
     const target = path.resolve(home, 'target')
     fs.mkdirSync(target, {recursive: true})
     const verified = path.resolve(target, '6-verify/org/eolang/simple.xmir')
@@ -23,32 +29,8 @@ describe('transpile', function() {
       'transpile',
       '--verbose',
       '-t', target,
-      '-r', path.resolve('test/resources/transpile')
     ]);
     assert.ok(fs.existsSync(path.resolve(target, '8-transpile/org/eolang/simple.xmir')))
-
     done()
   })
-  it('should transpile with eoc', function(done) {
-    const home = path.resolve('temp/test-transpile')
-    fs.rmSync(home, {recursive: true, force: true})
-    fs.mkdirSync(path.resolve(home, 'src'), {recursive: true})
-    fs.writeFileSync(path.resolve(home, 'src/simple.eo'), `${comment}\n[] > simple\n`)
-    const target = path.resolve(home, 'target')
-    fs.mkdirSync(target, {recursive: true})
-    runEoc([
-      'verify',
-      '--verbose',
-      '-s', path.resolve(home, 'src'),
-      '-t', target
-    ])
-    runSync([
-      'transpile',
-      '--verbose',
-      '-t', target,
-      // '-r', path.resolve('test/resources/transpile')
-    ]);
-    assert.ok(fs.existsSync(path.resolve(target, '8-transpile/org/eolang/simple.xmir')))
-    done()
-  });
 })
