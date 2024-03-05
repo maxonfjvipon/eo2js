@@ -65,7 +65,7 @@ const transpile = function(options) {
         filtered
           .filter((_, index) => index > 0)
           .forEach((obj) => fs.appendFileSync(dest, `\n${obj['javascript']}`))
-        fs.appendFileSync(dest, $exports(first['@_name'])) // @todo via XSL
+        fs.appendFileSync(dest, $exports(first['@_name']))
       }
     })
 }
