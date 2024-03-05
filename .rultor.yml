@@ -8,7 +8,6 @@ install: |
   sudo npm install --no-color --global grunt-cli
   npm uninstall --no-color grunt-cli
   npm install --no-color mocha
-  npm install --no-color xslt3 --global
   pdd -f /dev/null -v
 release:
   pre: false
