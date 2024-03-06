@@ -20,26 +20,26 @@ const $exports = function(name) {
 
 /**
  * Transpile XMIR to JavaScript.
- * @param {{foreign: String, generated: String, resources: String}} options - Transpile command options
+ * @param {{foreign: String, project: String, resources: String}} options - Transpile command options
  */
 const transpile = function(options) {
+  options = {...program.opts(), ...options}
   const transformations = [
     'objects', 'package', 'attrs', 'data', 'to-js'
-  ].map((name) => path.resolve(options.resources, `json/${name}.sef.json`))
+  ].map((name) => path.resolve(options['resources'], `json/${name}.sef.json`))
   const parser = new XMLParser({ignoreAttributes: false})
   const verified = 'verified'
   const dir = '8-transpile'
-  const opts = program.opts()
-  const generated = path.resolve(opts.target, options.generated)
-  fs.mkdirSync(generated, {recursive: true})
+  const project = path.resolve(options['target'], options['project'])
+  fs.mkdirSync(project, {recursive: true})
 
-  JSON.parse(fs.readFileSync(path.resolve(opts.target, options.foreign)).toString())
+  JSON.parse(fs.readFileSync(path.resolve(options['target'], options['foreign'])).toString())
     .filter((tojo) => tojo.hasOwnProperty(verified))
     .forEach((tojo) => {
       const file = tojo[verified]
       const text = fs.readFileSync(file).toString()
       let xml = parser.parse(text)
-      const target = path.resolve(opts.target, dir, `${pathFromName(xml['program']['@_name'])}.xmir`)
+      const target = path.resolve(options['target'], dir, `${pathFromName(xml['program']['@_name'])}.xmir`)
       fs.mkdirSync(target.substring(0, target.lastIndexOf('/')), {recursive: true})
       fs.writeFileSync(target, text)
       xml = text
@@ -59,7 +59,7 @@ const transpile = function(options) {
       const filtered = objects.filter((obj) => !!obj['javascript'] && !obj['@_atom'])
       if (filtered.length > 0) {
         const first = filtered[0]
-        const dest = path.resolve(generated, `${pathFromName(first['@_js-name'])}.js`)
+        const dest = path.resolve(project, `${pathFromName(first['@_js-name'])}.js`)
         fs.mkdirSync(dest.substring(0, dest.lastIndexOf('/')), {recursive: true})
         fs.writeFileSync(dest, first['javascript'])
         filtered
