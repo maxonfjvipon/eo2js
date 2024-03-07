@@ -14,8 +14,23 @@ const pathFromName = function(name) {
   return name.replace(/\./g, '/')
 }
 
-const $exports = function(name) {
+/**
+ * Export given variable from module.
+ * @param {String} name - Variable name
+ * @return {String} - `\n\nmodule.exports = ${string}`
+ */
+const exporting = function(name) {
   return `\n\nmodule.exports = ${name}`
+}
+
+/**
+ * Make directory if not exist.
+ * @param {String} dir - Directory
+ */
+const makeDirIfNotExist = function(dir) {
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, {recursive: true})
+  }
 }
 
 /**
@@ -32,16 +47,14 @@ const transpile = function(options) {
   const dir = '8-transpile'
   const project = path.resolve(options['target'], options['project'])
   fs.mkdirSync(project, {recursive: true})
-
   JSON.parse(fs.readFileSync(path.resolve(options['target'], options['foreign'])).toString())
     .filter((tojo) => tojo.hasOwnProperty(verified))
     .forEach((tojo) => {
-      const file = tojo[verified]
-      const text = fs.readFileSync(file).toString()
+      const text = fs.readFileSync(tojo[verified]).toString()
       let xml = parser.parse(text)
-      const target = path.resolve(options['target'], dir, `${pathFromName(xml['program']['@_name'])}.xmir`)
-      fs.mkdirSync(target.substring(0, target.lastIndexOf('/')), {recursive: true})
-      fs.writeFileSync(target, text)
+      const transpiled = path.resolve(options['target'], dir, `${pathFromName(xml['program']['@_name'])}.xmir`)
+      makeDirIfNotExist(transpiled.substring(0, transpiled.lastIndexOf('/')))
+      fs.writeFileSync(transpiled, text)
       xml = text
       transformations.forEach((transformation) => {
         xml = saxon.transform({
@@ -50,22 +63,20 @@ const transpile = function(options) {
           destination: 'serialized'
         }).principalResult
       })
-      fs.writeFileSync(target, xml)
+      fs.writeFileSync(transpiled, xml)
       xml = parser.parse(xml)
       let objects = xml.program.objects.object
       if (!Array.isArray(objects)) {
         objects = [objects]
       }
-      const filtered = objects.filter((obj) => !!obj['javascript'] && !obj['@_atom'])
+      const filtered = objects.filter((obj) => obj.hasOwnProperty('javascript') && !obj.hasOwnProperty('@_atom'))
       if (filtered.length > 0) {
         const first = filtered[0]
         const dest = path.resolve(project, `${pathFromName(first['@_js-name'])}.js`)
-        fs.mkdirSync(dest.substring(0, dest.lastIndexOf('/')), {recursive: true})
+        makeDirIfNotExist(dest.substring(0, dest.lastIndexOf('/')))
         fs.writeFileSync(dest, first['javascript'])
-        filtered
-          .filter((_, index) => index > 0)
-          .forEach((obj) => fs.appendFileSync(dest, `\n${obj['javascript']}`))
-        fs.appendFileSync(dest, $exports(first['@_name']))
+        filtered.slice(1).forEach((obj) => fs.appendFileSync(dest, `\n${obj['javascript']}`))
+        fs.appendFileSync(dest, exporting(first['@_name']))
       }
     })
 }
