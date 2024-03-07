@@ -30,10 +30,7 @@ const link = function(options) {
   options = {...program.opts(), ...options}
   const project = path.resolve(options.target, options.project)
   fs.writeFileSync(path.resolve(project, 'package.json'), JSON.stringify(pckg))
-  execSync('npm install', {
-    cwd: project,
-    timeout: 1200000,
-  })
+  execSync('npm install', {cwd: project})
   fs.copyFileSync(
     path.resolve(options.resources, `js/${main}`),
     path.resolve(project, main)

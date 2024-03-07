@@ -1,6 +1,6 @@
 {
   "name": "eo2js",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "EOLANG to JavaScript translator and runner",
   "main": "eo2js",
   "bin": {
