@@ -1,0 +1,14 @@
+{
+  "xsls": [
+    "objects",
+    "package"
+  ],
+  "tests": [
+    ".program.objects.object{.\"@_name\" == 'simple'}{.\"@_package\" == 'com.eo2js'}"
+  ],
+  "eo": [
+    "+package com.eo2js\n",
+    "# Simple.",
+    "[] > simple"
+  ]
+}

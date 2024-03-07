@@ -4,7 +4,7 @@ const fs = require('fs');
 const {execSync} = require('child_process');
 
 /**
- * Entry point file.
+ * Entry point JS file.
  * @type {string}
  */
 const main = '__main__.js'
@@ -24,7 +24,7 @@ const pckg = {
 
 /**
  * Build npm project.
- * @param {Object} options
+ * @param {{target: String, project: String, resources: String}} options - Program options
  */
 const link = function(options) {
   options = {...program.opts(), ...options}

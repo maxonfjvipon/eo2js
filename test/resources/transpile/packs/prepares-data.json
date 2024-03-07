@@ -1,0 +1,16 @@
+{
+  "xsls": [
+    "data"
+  ],
+  "tests": [
+    ".program.objects.o.o{.\"@_base\" == 'org.eolang.int'}{.o{.\"@_base\" == 'org.eolang.bytes'}{.value == \"['0x00', '0x00', '0x00', '0x00', '0x00', '0x00', '0x00', '0x05']\"}}",
+    ".program.objects.o.o{.\"@_base\" == 'org.eolang.string'}{.o{.\"@_base\" == 'org.eolang.bytes'}{.value == \"['0x48', '0x65', '0x6C', '0x6C', '0x6F']\"}}"
+  ],
+  "eo": [
+    "+package com.eo2js\n",
+    "# Simple.",
+    "[] > simple",
+    "  5 > five",
+    "  \"Hello\" > str"
+  ]
+}

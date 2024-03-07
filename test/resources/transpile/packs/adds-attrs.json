@@ -1,0 +1,16 @@
+{
+  "xsls": [
+    "objects",
+    "attrs"
+  ],
+  "tests": [
+    ".program.objects.object{.\"@_name\" == 'simple'}{.attr{.bound.o{.\"@_base\" == 'org.eolang.stdout'}}}",
+    ".program.objects.object{.\"@_name\" == 'simple'}{.attr{.free.o{.\"@_name\" == 'x'}}}"
+  ],
+  "eo": [
+    "+package com.eo2js\n",
+    "# Simple.",
+    "[x] > simple",
+    "  stdout > @"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "xsls": [
+    "objects"
+  ],
+  "tests": [
+    ".program.objects.object.xmir",
+    ".program.objects.object{.\"@_name\" == 'simple'}"
+  ],
+  "eo": [
+    "# Simple.",
+    "[] > simple"
+  ]
+}

@@ -2,6 +2,10 @@ const path = require('path')
 const assert = require('assert')
 const fs = require('fs')
 const {execSync} = require('child_process')
+const mvnw = require('./mvnw/mvnw.js');
+const {XMLParser} = require('fast-xml-parser');
+const saxon = require('saxon-js')
+const jp = require('jspath')
 
 /**
  * Execute JS file with node.
@@ -60,7 +64,60 @@ const assertFilesExist = function(stdout, home, paths) {
       stdout + '\nFile ' + abs + ' is absent'
     )
   })
-};
+}
+
+/**
+ * Parser.
+ * @type {XMLParser}
+ */
+const parser = new XMLParser({ignoreAttributes: false})
+
+/**
+ * Transformations test pack.
+ * @param {{home: String, sources: String, target: String, json: Object}} params - Pack params
+ * @return {{skip: boolean, failures: array.<String>, xmir: String, json: Object}} - Output
+ */
+const pack = function(params) {
+  const res = {
+    skip: false,
+    failures: [],
+    xmir: '',
+    json: ''
+  }
+  if (params.json['skip'] || !params.json['xsls'] || params.json['xsls'].length === 0) {
+    res.skip = true
+  } else {
+    const sources = path.resolve(params.home, params.sources)
+    const target = path.resolve(params.home, params.target)
+    fs.mkdirSync(sources, {recursive: true})
+    fs.mkdirSync(target, {recursive: true})
+    fs.writeFileSync(path.resolve(sources, `test.eo`), `${params.json['eo'].join('\n')}\n`)
+    mvnw(['register', 'parse', 'optimize', 'shake'], params)
+    const shaken = JSON.parse(
+      fs.readFileSync(path.resolve(target, 'eo-foreign.json')).toString()
+    )[0]['shaken']
+    let xml = fs.readFileSync(shaken).toString()
+    const transformations = path.resolve(__dirname, '../src/resources/json')
+    params.json['xsls']
+      .map((name) => path.resolve(transformations, `${name}.sef.json`))
+      .forEach((transformation) => {
+        xml = saxon.transform({
+          stylesheetFileName: transformation,
+          sourceText: xml,
+          destination: 'serialized'
+        }).principalResult
+      })
+    res.xmir = xml
+    xml = parser.parse(xml)
+    res.json = xml
+    params.json['tests'].forEach((test) => {
+      if (jp.apply(test, xml).length === 0) {
+        res.failures.push(test)
+      }
+    })
+  }
+  return res
+}
 
 /**
  * Default comment in front of abstract EO object.
@@ -72,5 +129,6 @@ module.exports = {
   assertFilesExist,
   runSync,
   runEoc,
+  pack,
   comment
 }
