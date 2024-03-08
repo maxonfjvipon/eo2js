@@ -9,7 +9,7 @@ Gruntfile.js
 test/
 node_modules/
 src/resources/xsl/
-src/compile-xsls.js
+src/compile-stylesheets.js
 temp/
 mochawesome-report/
 .idea/

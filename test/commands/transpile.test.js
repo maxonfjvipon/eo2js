@@ -2,8 +2,41 @@ const assert = require('assert');
 const path = require('path');
 const fs = require('fs');
 const {pack} = require('../helpers');
+const compileStylesheets = require('../../src/compile-stylesheets');
 
 const temp = path.resolve('temp')
+
+describe('transpile', function() {
+  before('compile stylesheets', function() {
+    compileStylesheets()
+  })
+  describe('transformation packs', function() {
+    this.timeout(0)
+    const packs = path.resolve(__dirname, '../resources/transpile/packs')
+    fs.readdirSync(packs).forEach((test) => {
+      it(test, function(done) {
+        const pth = path.resolve(temp, 'test-transpile/packs')
+        const folder = path.resolve(pth, test.substring(0, test.lastIndexOf('.json')))
+        if (fs.existsSync(folder)) {
+          fs.rmSync(folder, {recursive: true})
+        }
+        const json = JSON.parse(fs.readFileSync(path.resolve(packs, test)).toString())
+        const res = pack({home: folder, sources: 'src', target: 'target', json})
+        if (res.skip) {
+          this.skip()
+        } else {
+          assert.equal(
+            res.failures.length,
+            0,
+            `Result XMIR:\n ${res.xmir}\nJSON: ${JSON.stringify(res.json, null, 2)}\nFailed tests: ${res.failures.join(';\n')}`
+          )
+          done()
+        }
+      })
+    })
+  })
+})
+
 
 // describe('transpile', function() {
 //   before('compile xsls', function() {
@@ -33,29 +66,3 @@ const temp = path.resolve('temp')
 //     done()
 //   })
 // })
-
-describe('tranpile transformation packs', function() {
-  this.timeout(0)
-  const packs = path.resolve(__dirname, '../resources/transpile/packs')
-  fs.readdirSync(packs).forEach((test) => {
-    it(test, function(done) {
-      const pth = path.resolve(temp, 'test-transpile/packs')
-      const folder = path.resolve(pth, test.substring(0, test.lastIndexOf('.json')))
-      if (fs.existsSync(folder)) {
-        fs.rmSync(folder, {recursive: true})
-      }
-      const json = JSON.parse(fs.readFileSync(path.resolve(packs, test)).toString())
-      const res = pack({home: folder, sources: 'src', target: 'target', json})
-      if (res.skip) {
-        this.skip()
-      } else {
-        assert.equal(
-          res.failures.length,
-          0,
-          `Result XMIR:\n ${res.xmir}\nJSON: ${JSON.stringify(res.json, null, 2)}\nFailed tests: ${res.failures.join(';\n')}`
-        )
-        done()
-      }
-    })
-  })
-})

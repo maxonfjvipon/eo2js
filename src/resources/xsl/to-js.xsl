@@ -556,7 +556,7 @@ SOFTWARE.
       </xsl:for-each>
       <xsl:text>})</xsl:text>
     </xsl:if>
-    <xsl:apply-templates select="value|tuple">
+    <xsl:apply-templates select="value">
       <xsl:with-param name="name" select="$name"/>
       <xsl:with-param name="indent" select="$indent"/>
     </xsl:apply-templates>

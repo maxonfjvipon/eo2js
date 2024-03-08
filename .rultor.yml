@@ -16,12 +16,12 @@ release:
     sed -i "s/0\.0\.0/${tag}/" package.json
     sed -i "s/0\.0\.0/${tag}/" src/version.js
     sed -i "s/0000-00-00/$(date +%Y-%m-%d)/" src/version.js
-    node src/compile-xsls.js
+    node -e "require('./src/compile-stylesheets.js')()"
     grunt --no-color
     git commit -am "set version to ${tag}"
     chmod 600 ../npmrc
     npm publish --no-color --userconfig=../npmrc
 merge:
   script: |-
-    node src/compile-xsls.js
+    node -e "require('./src/compile-stylesheets.js')()"    
     grunt --no-color
