@@ -16,6 +16,7 @@ program
   .option('-t, --target <path>', 'Target directory with all generated files', '.eoc')
   .option('-p, --project <path>', 'Path to result JavaScript project', 'project')
   .option('-r, --resources <path>', 'Path to the resources', 'src/resources')
+  .option('--alone', 'Just run a single command without dependencies')
   // .option('--hash <hex>', 'Hash in objectionary/home to compile against', parser)
   // .option('--parser <version>', 'Set the version of EO parser to use', parser)
   // .option('--latest', 'Use the latest parser version from Maven Central')
@@ -39,14 +40,25 @@ program.command('transpile')
  */
 program.command('link')
   .description('Build npm project')
-  .action(link)
+  .action((opts) => {
+    if (program.opts().alone === undefined) {
+      transpile(opts)
+    }
+    link(opts)
+  })
 
 /**
  * Dataize.
  */
 program.command('dataize')
   .description('Dataize program')
-  .action((opts) => dataize(program.args[1], program.args.slice(2), opts))
+  .action((opts) => {
+    if (program.opts().alone === undefined) {
+      transpile(opts)
+      link(opts)
+    }
+    dataize(program.args[1], program.args.slice(2), opts)
+  })
 
 try {
   program.parse(process.argv)
