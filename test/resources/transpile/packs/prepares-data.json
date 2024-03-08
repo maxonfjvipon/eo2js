@@ -8,7 +8,7 @@
   ],
   "eo": [
     "+package com.eo2js\n",
-    "# Simple.",
+    "# This is the default 64+ symbols comment in front of named abstract object.",
     "[] > simple",
     "  5 > five",
     "  \"Hello\" > str"

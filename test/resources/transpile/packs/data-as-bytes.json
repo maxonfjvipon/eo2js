@@ -1,0 +1,99 @@
+{
+  "xsls": [
+    "objects",
+    "package",
+    "attrs",
+    "data",
+    "to-js"
+  ],
+  "tests": [
+    {
+      "node": ".program.objects.object{.\"@_name\" == 't'}.javascript",
+      "method": "includes",
+      "args": [
+        [
+          "        let ret = phi.take('org').take('eolang').take('bool').copy()",
+          "          let ret_1 = phi.take('org').take('eolang').take('bytes').copy()",
+          "          ret_1.assets['Δ'] = ['0x01']",
+          "        ret = ret.with({",
+          "          0: ret_1",
+          "        })",
+          "        return ret"
+        ]
+      ]
+    },
+    {
+      "node": ".program.objects.object{.\"@_name\" == 'f'}.javascript",
+      "method": "includes",
+      "args": [
+        [
+          "        let ret = phi.take('org').take('eolang').take('bool').copy()",
+          "          let ret_1 = phi.take('org').take('eolang').take('bytes').copy()",
+          "          ret_1.assets['Δ'] = ['0x00']",
+          "        ret = ret.with({",
+          "          0: ret_1",
+          "        })",
+          "        return ret"
+        ]
+      ]
+    },
+    {
+      "node": ".program.objects.object{.\"@_name\" == 'i'}.javascript",
+      "method": "includes",
+      "args": [
+        [
+          "        let ret = phi.take('org').take('eolang').take('int').copy()",
+          "          let ret_1 = phi.take('org').take('eolang').take('bytes').copy()",
+          "          ret_1.assets['Δ'] = ['0x00', '0x00', '0x00', '0x00', '0x00', '0x00', '0x00', '0x2A']",
+          "        ret = ret.with({",
+          "          0: ret_1",
+          "        })",
+          "        return ret"
+        ]
+      ]
+    },
+    {
+      "node": ".program.objects.object{.\"@_name\" == 'fl'}.javascript",
+      "method": "includes",
+      "args": [
+        [
+          "        let ret = phi.take('org').take('eolang').take('float').copy()",
+          "          let ret_1 = phi.take('org').take('eolang').take('bytes').copy()",
+          "          ret_1.assets['Δ'] = ['0x40', '0x0C', '0x00', '0x00', '0x00', '0x00', '0x00', '0x00']",
+          "        ret = ret.with({",
+          "          0: ret_1",
+          "        })",
+          "        return ret"
+        ]
+      ]
+    },
+    {
+      "node": ".program.objects.object{.\"@_name\" == 'b'}.javascript",
+      "method": "includes",
+      "args": [
+        [
+          "        let ret = phi.take('org').take('eolang').take('bytes').copy()",
+          "        ret.assets['Δ'] = ['0x01', '0xAF']",
+          "        return ret"
+        ]
+      ]
+    }
+  ],
+  "eo": [
+    "# This is the default 64+ symbols comment in front of named abstract object.",
+    "[] > t",
+    "  TRUE > @",
+    "# This is the default 64+ symbols comment in front of named abstract object.",
+    "[] > f",
+    "  bool FALSE > @",
+    "# This is the default 64+ symbols comment in front of named abstract object.",
+    "[] > i",
+    "  42 > @",
+    "# This is the default 64+ symbols comment in front of named abstract object.",
+    "[] > fl",
+    "  float 3.5 > @",
+    "# This is the default 64+ symbols comment in front of named abstract object.",
+    "[] > b",
+    "  01-AF > @"
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "xsls": [
+    "objects",
+    "package",
+    "attrs",
+    "data",
+    "to-js"
+  ],
+  "tests": [
+    {
+      "node": ".program.objects.object{.\"@_name\" == 'foo'}.javascript",
+      "method": "includes",
+      "args": [
+        [
+          "  obj.attrs['φ'] = attr.once(",
+          "    attr.lambda(",
+          "      obj, function(rho) {",
+          "        let ret = phi.take('org').take('eolang').take('stdout').copy()",
+          "          let ret_1 = rho.take('x')",
+          "        ret = ret.with({",
+          "          0: ret_1",
+          "        })",
+          "        ret = ret.copy()",
+          "        return ret",
+          "      }",
+          "    )",
+          "  )"
+        ]
+      ]
+    }
+  ],
+  "eo": [
+    "# This is the default 64+ symbols comment in front of named abstract object.",
+    "[x] > foo",
+    "  stdout' x > @"
+  ]
+}

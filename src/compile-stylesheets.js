@@ -28,7 +28,7 @@ const compile = function(source, dest) {
 
 /**
  * Compile XLS stylesheets to JSON.
- * @param {Array.<String>|undefined} names - names of stylesheets to compile
+ * @param {Array.<String>|undefined} [names] - names of stylesheets to compile
  */
 const compileStylesheets = function(names) {
   names = names || all

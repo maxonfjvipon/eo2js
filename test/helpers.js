@@ -108,11 +108,30 @@ const pack = function(params) {
         }).principalResult
       })
     res.xmir = xml
-    xml = parser.parse(xml)
+    xml = parser.parse(xml, {})
     res.json = xml
     params.json['tests'].forEach((test) => {
-      if (jp.apply(test, xml).length === 0) {
-        res.failures.push(test)
+      if (typeof test === 'object') {
+        const node = test.node
+        const method = test.method
+        const args = test.args
+        const applied = jp.apply(node, xml)
+        if (applied.length === 0) {
+          res.failures.push(node)
+        } else {
+          args.forEach((arg) => {
+            if (Array.isArray(arg)) {
+              arg = arg.join('\n')
+            }
+            if (!applied[0][method](arg)) {
+              res.failures.push(`NODE: ${node}, METHOD: ${method}, ARG: ${arg}`)
+            }
+          })
+        }
+      } else {
+        if (jp.apply(test, xml).length === 0) {
+          res.failures.push(test)
+        }
       }
     })
   }

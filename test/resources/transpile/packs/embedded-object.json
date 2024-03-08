@@ -1,0 +1,80 @@
+{
+  "xsls": [
+    "objects",
+    "package",
+    "attrs",
+    "data",
+    "to-js"
+  ],
+  "tests": [
+    {
+      "node": ".program.objects.object{.\"@_name\" == 'foo'}.javascript",
+      "method": "includes",
+      "args": [
+        [
+          "  obj.attrs['this'] = attr.once(",
+          "    attr.lambda(",
+          "      obj, function(rho) {",
+          "        let ret = rho",
+          "        return ret",
+          "      }",
+          "    )",
+          "  )"
+        ],
+        [
+          "  obj.attrs['xyz'] = attr.once(",
+          "    attr.lambda(",
+          "      obj, function(rho) {",
+          "        let ret = foo$xyz(rho)",
+          "        return ret",
+          "      }",
+          "    )",
+          "  )"
+        ]
+      ]
+    },
+    {
+      "node": ".program.objects.object{.\"@_name\" == 'foo$xyz'}.javascript",
+      "method": "includes",
+      "args": [
+        [
+          "  obj.attrs['bar'] = attr.once(",
+          "    attr.lambda(",
+          "      obj, function(rho) {",
+          "        let ret = foo$xyz$bar(rho)",
+          "        return ret",
+          "      }",
+          "    )",
+          "  )"
+        ]
+      ]
+    },
+    {
+      "node": ".program.objects.object{.\"@_name\" == 'foo$xyz$bar'}.javascript",
+      "method": "includes",
+      "args": [
+        [
+          "  obj.attrs['φ'] = attr.once(",
+          "    attr.lambda(",
+          "      obj, function(rho) {",
+          "        let ret_base = rho.take('σ').take('σ')",
+          "        let ret = ret_base.take('x')",
+          "        return ret",
+          "      }",
+          "    )",
+          "  )"
+        ]
+      ]
+    }
+  ],
+  "eo": [
+    "# This is the default 64+ symbols comment in front of named abstract object.",
+    "[x] > foo",
+    "  $ > this",
+    "  # This is the default 64+ symbols comment in front of named abstract object.",
+    "  [] > xyz",
+    "    # This is the default 64+ symbols comment in front of named abstract object.",
+    "    [] > bar",
+    "      this.x > @"
+  ]
+}

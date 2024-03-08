@@ -7,7 +7,7 @@ describe('eo2js', function() {
     const stdout = runSync(['--version'])
     assert.equal(version.what + '\n', stdout)
   })
-  it('prints help screen', function() {
+  it('should print help screen', function() {
     const stdout = runSync(['--help'])
     assert.ok(stdout.includes('Usage: eo2js'))
     assert.ok(stdout.includes(version.what))

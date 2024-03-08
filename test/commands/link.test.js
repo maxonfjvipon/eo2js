@@ -15,7 +15,7 @@ describe('link', function() {
    * @return {String} - Stdout.
    */
   const link = function() {
-    return runSync(['link', '-t', target, '-p project'])
+    return runSync(['link', '-t', target, '-p project --alone'])
   }
   it('should create all necessary files and install npm project', function(done) {
     assertFilesExist(link(), project, [

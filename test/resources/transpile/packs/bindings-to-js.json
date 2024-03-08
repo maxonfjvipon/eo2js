@@ -1,0 +1,39 @@
+{
+  "xsls": [
+    "objects",
+    "package",
+    "attrs",
+    "data",
+    "to-js"
+  ],
+  "tests": [
+    {
+      "node": ".program.objects.object.javascript",
+      "method": "includes",
+      "args": [
+        [
+          "        ret = ret.with({",
+          "          0: ret_1",
+          "        })"
+        ],
+        [
+          "        ret = ret.with({",
+          "          'ρ': ret_1",
+          "        })"
+        ],
+        [
+          "        ret = ret.with({",
+          "          'text': ret_1",
+          "        })"
+        ]
+      ]
+    }
+  ],
+  "eo": [
+    "# Simple.",
+    "[] > simple",
+    "  stdout x:0 > print1",
+    "  stdout x:^ > print2",
+    "  stdout x:text > print3"
+  ]
+}

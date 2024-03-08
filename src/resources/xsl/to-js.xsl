@@ -142,30 +142,13 @@ SOFTWARE.
               <xsl:apply-templates select="/program" mode="imports"/>
               <xsl:apply-templates select="//object[@atom]" mode="atom-imports"/>
             </xsl:if>
+            <!-- <xsl:apply-templates select="//meta[head='junit' or head='tests']" mode="head"/>-->
             <xsl:apply-templates select="." mode="body"/>
           </xsl:element>
         </xsl:copy>
       </xsl:for-each>
     </xsl:copy>
   </xsl:template>
-
-  <!--  &lt;!&ndash; Object &ndash;&gt;-->
-  <!--  <xsl:template match="object">-->
-  <!--    <xsl:copy>-->
-  <!--      <xsl:apply-templates select="@*"/>-->
-  <!--      <xsl:element name="javascript">-->
-  <!--        <xsl:if test="position()=1">-->
-  <!--          <xsl:apply-templates select="/program" mode="license"/>-->
-  <!--          <xsl:apply-templates select="/program" mode="imports"/>-->
-  <!--        </xsl:if>-->
-  <!--&lt;!&ndash;        <xsl:apply-templates select="/program" mode="license"/>&ndash;&gt;-->
-  <!--&lt;!&ndash;        <xsl:apply-templates select="//meta[head='package']" mode="head"/>&ndash;&gt;-->
-  <!--&lt;!&ndash;        <xsl:apply-templates select="/program" mode="imports"/>&ndash;&gt;-->
-  <!--&lt;!&ndash;        <xsl:apply-templates select="//meta[head='junit' or head='tests']" mode="head"/>&ndash;&gt;-->
-  <!--        <xsl:apply-templates select="." mode="body"/>-->
-  <!--      </xsl:element>-->
-  <!--    </xsl:copy>-->
-  <!--  </xsl:template>-->
 
   <!-- Object name -->
   <xsl:template match="object/@name">
@@ -319,8 +302,7 @@ SOFTWARE.
     <xsl:param name="name"/>
     <xsl:param name="indent"/>
     <xsl:variable name="current" select="."/>
-    <xsl:variable name="source"
-                  select="//*[generate-id()!=generate-id($current) and @name=$current/@base and @line=$current/@ref]"/>
+    <xsl:variable name="source" select="//*[generate-id()!=generate-id($current) and @name=$current/@base and @line=$current/@ref]"/>
     <!-- Terminate -->
     <xsl:if test="count($source) &gt; 1">
       <xsl:message terminate="yes">
@@ -373,16 +355,9 @@ SOFTWARE.
       </xsl:when>
       <xsl:when test="$source/@level">
         <xsl:text>rho</xsl:text>
-        <xsl:for-each select="0 to $source/@level">
+        <xsl:for-each select="1 to $source/@level">
           <xsl:text>.take('σ')</xsl:text>
-          <!--          <xsl:text>new PhMethod(</xsl:text>-->
         </xsl:for-each>
-        <!--        <xsl:for-each select="1 to $source/@level">-->
-        <!--          <xsl:text>, "σ")</xsl:text>-->
-        <!--        </xsl:for-each>-->
-        <!--        <xsl:text>, "</xsl:text>-->
-        <!--        <xsl:value-of select="$source/@name"/>-->
-        <!--        <xsl:text>")</xsl:text>-->
       </xsl:when>
       <xsl:when test="$source">
         <xsl:text>rho.take('</xsl:text>
@@ -397,10 +372,10 @@ SOFTWARE.
       <xsl:with-param name="name" select="$name"/>
       <xsl:with-param name="indent" select="$indent"/>
     </xsl:apply-templates>
-    <!--    <xsl:apply-templates select=".[@copy]" mode="copy">-->
-    <!--      <xsl:with-param name="name" select="$name"/>-->
-    <!--      <xsl:with-param name="indent" select="$indent"/>-->
-    <!--    </xsl:apply-templates>-->
+    <xsl:apply-templates select=".[@copy]" mode="copy">
+      <xsl:with-param name="name" select="$name"/>
+      <xsl:with-param name="indent" select="$indent"/>
+    </xsl:apply-templates>
     <!--    <xsl:apply-templates select="." mode="located">-->
     <!--      <xsl:with-param name="name" select="$name"/>-->
     <!--      <xsl:with-param name="indent" select="$indent"/>-->
@@ -449,22 +424,22 @@ SOFTWARE.
       <xsl:with-param name="indent" select="$indent"/>
       <xsl:with-param name="skip" select="1"/>
     </xsl:apply-templates>
-    <!--    <xsl:apply-templates select=".[@copy]" mode="copy">-->
-    <!--      <xsl:with-param name="name" select="$name"/>-->
-    <!--      <xsl:with-param name="indent" select="$indent"/>-->
-    <!--    </xsl:apply-templates>-->
+    <xsl:apply-templates select=".[@copy]" mode="copy">
+      <xsl:with-param name="name" select="$name"/>
+      <xsl:with-param name="indent" select="$indent"/>
+    </xsl:apply-templates>
   </xsl:template>
-  <!--  <xsl:template match="o[@copy]" mode="copy">-->
-  <!--    <xsl:param name="indent"/>-->
-  <!--    <xsl:param name="name" select="'o'"/>-->
-  <!--    <xsl:value-of select="$indent"/>-->
-  <!--    <xsl:value-of select="eo:tabs(1)"/>-->
-  <!--    <xsl:value-of select="$name"/>-->
-  <!--    <xsl:text> = new PhCopy(</xsl:text>-->
-  <!--    <xsl:value-of select="$name"/>-->
-  <!--    <xsl:text>);</xsl:text>-->
-  <!--    <xsl:value-of select="eo:eol(0)"/>-->
-  <!--  </xsl:template>-->
+
+  <!-- COPY -->
+  <xsl:template match="o[@copy]" mode="copy">
+    <xsl:param name="indent"/>
+    <xsl:param name="name"/>
+    <xsl:value-of select="eo:eol($indent)"/>
+    <xsl:value-of select="$name"/>
+    <xsl:text> = </xsl:text>
+    <xsl:value-of select="$name"/>
+    <xsl:text>.copy()</xsl:text>
+  </xsl:template>
   <!--  <xsl:template match="*" mode="located">-->
   <!--    <xsl:param name="indent"/>-->
   <!--    <xsl:param name="name" select="'o'"/>-->
