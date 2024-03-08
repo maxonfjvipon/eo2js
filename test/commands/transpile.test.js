@@ -39,7 +39,7 @@ describe('tranpile transformation packs', function() {
   const packs = path.resolve(__dirname, '../resources/transpile/packs')
   fs.readdirSync(packs).forEach((test) => {
     it(test, function(done) {
-      const pth = path.resolve(temp, 'packs')
+      const pth = path.resolve(temp, 'test-transpile/packs')
       const folder = path.resolve(pth, test.substring(0, test.lastIndexOf('.json')))
       if (fs.existsSync(folder)) {
         fs.rmSync(folder, {recursive: true})
