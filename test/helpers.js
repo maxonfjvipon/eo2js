@@ -12,41 +12,34 @@ const jp = require('jspath')
  *
  * @param {String} js - JS file to execute
  * @param {Array.<String>} args - Arguments
+ * @param {boolean} print - Capture logs or not
  * @return {string} Stdout
  */
-const execNode = function(js, args) {
+const execNode = function(js, args, print) {
   try {
     return execSync(
       `node ${js} ${args.join(' ')}`,
       {
-        'timeout': 1200000,
-        'windowsHide': true,
+        timeout: 1200000,
+        windowsHide: true,
+        stdio: print ? null : 'ignore'
       }
     ).toString()
   } catch (ex) {
-    console.log(ex.stdout.toString())
+    console.debug(ex.stdout.toString())
     throw ex
   }
-};
-
-/**
- * Run EOLANG compiler.
- *
- * @param {Array.<String>} args - Arguments
- * @return {string} - Stdout
- */
-const runEoc = function(args) {
-  return execNode(path.resolve('./node_modules/eolang/src/eoc.js'), args)
 }
 
 /**
  * Helper to run eo2js command line tool.
  *
  * @param {Array.<string>} args - Array of args
+ * @param {Boolean} print - Capture logs
  * @return {String} Stdout
  */
-const runSync = function(args) {
-  return execNode(path.resolve('./src/eo2js.js'), args)
+const runSync = function(args, print = true) {
+  return execNode(path.resolve('./src/eo2js.js'), args, print)
 };
 
 /**
@@ -147,7 +140,6 @@ const comment = '# This is the default 64+ symbols comment in front of named abs
 module.exports = {
   assertFilesExist,
   runSync,
-  runEoc,
   pack,
   comment
 }

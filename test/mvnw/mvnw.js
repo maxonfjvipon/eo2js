@@ -32,7 +32,7 @@ function shell() {
 /**
  * Prepare options for Maven.
  * @param {{sources: String, target: String, home: String}} opts - Options
- * @return {Array} of Maven options
+ * @return {Array.<String>} - Maven options
  */
 const flags = function(opts) {
   return [
@@ -42,11 +42,15 @@ const flags = function(opts) {
   ]
 }
 
+/**
+ * Execute given goals of eo-maven-plugin.
+ * @param {Array.<String>} goals - Goals to execute in right order
+ * @param {{sources: String, target: String, home: String}} opts - Options
+ */
 const mvnw = function(goals, opts) {
-  opts = flags(opts)
   const bin = path.resolve(__dirname, 'mvnw') + (process.platform === 'win32' ? '.cmd' : '');
   const params = [
-    ...opts,
+    ...flags(opts),
     '--batch-mode',
     '--color=never',
     '--update-snapshots',

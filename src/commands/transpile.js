@@ -39,6 +39,13 @@ const makeDirIfNotExist = function(dir) {
  */
 const transpile = function(options) {
   options = {...program.opts(), ...options}
+  const foreign = path.resolve(options['target'], options['foreign'])
+  if (!fs.existsSync(foreign)) {
+    throw new Error(`File ${foreign} is not found`)
+  }
+  if (!foreign.endsWith('.json')) {
+    throw new Error(`Only .json foreign tojos file is supported, given ${foreign.substring(foreign.lastIndexOf('/'))}`)
+  }
   const transformations = [
     'objects', 'package', 'attrs', 'data', 'to-js'
   ].map((name) => path.resolve(options['resources'], `json/${name}.sef.json`))
@@ -47,7 +54,7 @@ const transpile = function(options) {
   const dir = '8-transpile'
   const project = path.resolve(options['target'], options['project'])
   fs.mkdirSync(project, {recursive: true})
-  JSON.parse(fs.readFileSync(path.resolve(options['target'], options['foreign'])).toString())
+  JSON.parse(fs.readFileSync(foreign).toString())
     .filter((tojo) => tojo.hasOwnProperty(verified))
     .forEach((tojo) => {
       const text = fs.readFileSync(tojo[verified]).toString()

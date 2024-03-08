@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <program dob="2024-02-13T11:50:46"
          ms="49"
-         name="org.eolang.simple"
+         name="com.eo2js.simple"
          revision="33bb3b6"
          source="/Users/maxonfjvipon/code/javascript/eo2js/eo2js/temp/test-transpile/src/org/eolang/simple.eo"
          time="2024-03-01T18:04:33.829973Z"
          version="0.35.2"><!--This is XMIR - a dialect of XML, which is used to present a parsed EO program. For more information please visit https://news.eolang.org/2022-11-25-xmir-guide.html-->
-   <listing># This is the default 64+ symbols comment in front of named abstract object.
+   <listing>+package com.eo2js
+
+# This is the default 64+ symbols comment in front of named abstract object.
 [] &gt; simple
 </listing>
    <errors>
@@ -69,7 +71,13 @@
       <sheet>set-locators</sheet>
    </sheets>
    <license/>
-   <metas/>
+   <metas>
+      <meta line="1">
+         <head>package</head>
+         <tail>com.eo2js</tail>
+         <part>com.eo2js</part>
+      </meta>
+   </metas>
    <objects>
       <o abstract=""
          line="2"
