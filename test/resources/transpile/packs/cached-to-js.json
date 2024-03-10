@@ -1,0 +1,39 @@
+{
+  "xsls": [
+    "objects",
+    "package",
+    "attrs",
+    "data",
+    "to-js"
+  ],
+  "tests": [
+    {
+      "node": ".program.objects.object.javascript",
+      "method": "includes",
+      "args": [
+        [
+          "const cached = require('eo2js-runtime/src/runtime/cached')"
+        ],
+        [
+          "  obj.attrs['std'] = attr.once(",
+          "    attr.lambda(",
+          "      obj, function(rho) {",
+          "        let ret = phi.take('org').take('eolang').take('stdout').copy()",
+          "          let ret_1 = phi.take('org').take('eolang').take('x')",
+          "        ret = ret.with({",
+          "          0: ret_1",
+          "        })",
+          "        return cached(ret)",
+          "      }",
+          "    )",
+          "  )"
+        ]
+      ]
+    }
+  ],
+  "eo": [
+    "# Simple.",
+    "[] > simple",
+    "  stdout x > std!"
+  ]
+}

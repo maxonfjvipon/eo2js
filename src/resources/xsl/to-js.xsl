@@ -266,13 +266,15 @@ SOFTWARE.
       <xsl:with-param name="name" select="'ret'"/>
       <xsl:with-param name="indent" select="4"/>
     </xsl:apply-templates>
-    <!--    <xsl:if test="o[@const]">-->
-    <!--      <xsl:value-of select="eo:tabs(3)"/>-->
-    <!--      <xsl:text>ret = cached(ret)</xsl:text>-->
-    <!--      <xsl:value-of select="eo:eol(0)"/>-->
-    <!--    </xsl:if>-->
     <xsl:value-of select="eo:eol(4)"/>
-    <xsl:text>return ret</xsl:text>
+    <xsl:choose>
+      <xsl:when test="o[@const]">
+        <xsl:text>return cached(ret)</xsl:text>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:text>return ret</xsl:text>
+      </xsl:otherwise>
+    </xsl:choose>
     <xsl:value-of select="eo:eol(3)"/>
     <xsl:text>}</xsl:text>
     <xsl:value-of select="eo:eol(2)"/>
@@ -619,6 +621,10 @@ SOFTWARE.
     <xsl:text>const object = require('eo2js-runtime/src/runtime/object')</xsl:text>
     <xsl:value-of select="eo:eol(0)"/>
     <xsl:text>const phi = require('eo2js-runtime/src/runtime/phi')</xsl:text>
+    <xsl:if test="//o[@const]">
+      <xsl:value-of select="eo:eol(0)"/>
+      <xsl:text>const cached = require('eo2js-runtime/src/runtime/cached')</xsl:text>
+    </xsl:if>
   </xsl:template>
 
   <!-- Atom imports -->
