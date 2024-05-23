@@ -28,7 +28,7 @@
     "eslint": "9.3.0",
     "eslint-config-google": "0.14.0",
     "grunt-contrib-clean": "2.0.1",
-    "grunt-eslint": "24.3.0",
+    "grunt-eslint": "25.0.0",
     "grunt-mocha-cli": "^7.0.0",
     "jspath": "0.4.0"
   }
