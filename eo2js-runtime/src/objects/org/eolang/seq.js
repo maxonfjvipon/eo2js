@@ -7,8 +7,8 @@ const taken = require('../../../runtime/taken');
 
 /**
  * Extract element from EO tuple and convert them to JS array.
- * @param {Object} tuple - EO tuple object
- * @return {Object[]} - Array of EO tuple elements.
+ * @param {object} tuple - EO tuple object
+ * @returns {object[]} - Array of EO tuple elements.
  */
 const tupleAsArray = function(tuple) {
   const length = Number(dataized(tuple.take('length'), INT))
@@ -23,7 +23,7 @@ const tupleAsArray = function(tuple) {
 
 /**
  * Seq.
- * @return {Object} - Seq object
+ * @returns {object} - Seq object
  */
 const seq = function() {
   const obj = object('seq')

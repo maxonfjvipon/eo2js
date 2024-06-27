@@ -2,9 +2,9 @@ const once = require('./once');
 
 /**
  * Object with applied bindings lazily.
- * @param {Object} object - Object to apply bindings to
- * @param {Object} bindings - Bindings to apply
- * @return {Object} - Object with applied bindings
+ * @param {object} object - Object to apply bindings to
+ * @param {object} bindings - Bindings to apply
+ * @returns {object} - Object with applied bindings
  */
 const applied = function(object, bindings) {
   return once(

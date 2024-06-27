@@ -3,9 +3,9 @@ const safe = require('../safe');
 const at_term = require('./at-term');
 
 /**
- * Attribute that catches {@link ErFailure} and throws {@link ErError}.
+ * Attribute that catches {@see ErFailure} and throws {@see ErError}.
  * @param {object} origin - Original attribute
- * @return {Object} - Attribute
+ * @returns {object} - Attribute
  */
 const at_safe = function(origin) {
   return at_term({

@@ -6,7 +6,7 @@ const dataized = require('../../../runtime/dataized');
 
 /**
  * Bytes.not.
- * @return {Object} - Bytes.not object
+ * @returns {object} - Bytes.not object
  */
 const bytes$not = function() {
   const obj = object('bytes$not')

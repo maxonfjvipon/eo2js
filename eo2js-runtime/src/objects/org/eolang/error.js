@@ -7,9 +7,9 @@ const ErError = require('../../../runtime/error/ErError');
  * Error.
  * You are NOT supposed to use this object programmatically. It is only
  * used from EO, but not from JS. From JS, you just throw
- * {@link ErFailure}. It will be properly caught and converted to the error.
+ * {@see ErFailure}. It will be properly caught and converted to the error.
  * Again, DON'T USE THIS OBJECT PROGRAMMATICALLY.
- * @return {Object} - Error object
+ * @returns {object} - Error object
  */
 const error = function() {
   const obj = object('error')

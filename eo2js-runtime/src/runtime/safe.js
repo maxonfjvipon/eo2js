@@ -2,10 +2,10 @@ const validated = require('./validated');
 const trapped = require('./trapped');
 
 /**
- * Object that catches {@link ErFailure} and
- * throws {@link ErError} in its 'take' and 'with' methods.
- * @param {Object} origin - Original object
- * @return {Object} - Safe object
+ * Object that catches {@see ErFailure} and
+ * throws {@see ErError} in its 'take' and 'with' methods.
+ * @param {object} origin - Original object
+ * @returns {object} - Safe object
  */
 const safe = function(origin) {
   return trapped(

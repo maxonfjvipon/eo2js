@@ -5,7 +5,12 @@ const lambda = require('./at-lambda')
 
 /**
  * API for attributes.
- * @type {{lambda: (function(Object, function(Object): Object): *)|{}, void: (function(string): *)|{}, once: (function(Object): *)|{}, simple: (function(Object): *)|{}}}
+ * @type {{
+ *  lambda: (object: object, callback: (object) => object) => any,
+ *  void: (string) => any,
+ *  once: (object) => any,
+ *  simple: (object) => any
+ * }}
  */
 const attr = {
   once,

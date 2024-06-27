@@ -7,7 +7,7 @@ const dataized = require('../../../runtime/dataized');
 
 /**
  * Bytes.xor.
- * @return {Object} - Bytes.xor object
+ * @returns {object} - Bytes.xor object
  */
 const bytes$xor = function() {
   const obj = object('bytes$xor')

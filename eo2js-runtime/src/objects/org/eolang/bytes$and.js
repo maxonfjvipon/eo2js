@@ -7,7 +7,7 @@ const {data} = require('../../../runtime/data');
 
 /**
  * Bytes.and.
- * @return {Object} - Bytes.and object
+ * @returns {object} - Bytes.and object
  */
 const bytes$and = function() {
   const obj = object('bytes$and')

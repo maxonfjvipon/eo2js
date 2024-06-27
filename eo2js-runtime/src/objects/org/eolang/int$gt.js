@@ -6,7 +6,7 @@ const at_void = require('../../../runtime/attribute/at-void')
 
 /**
  * Int.gt.
- * @return {any} - Int.gt object
+ * @returns {any} - Int.gt object
  */
 const int$gt = function() {
   const obj = object('int$gt')

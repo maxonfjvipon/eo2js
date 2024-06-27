@@ -5,7 +5,7 @@ const dataized = require('../../../runtime/dataized');
 
 /**
  * String.length.
- * @return {Object} - String.length object
+ * @returns {object} - String.length object
  */
 const string$length = function() {
   const obj = object('string$length')

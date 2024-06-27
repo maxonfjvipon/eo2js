@@ -7,7 +7,7 @@ const heaps = require('../../../runtime/heaps');
 
 /**
  * Malloc.of.allocated.read.
- * @return {Object} - Malloc.of.allocated.read object
+ * @returns {object} - Malloc.of.allocated.read object
  */
 const malloc$of$allocated$read = function() {
   const obj = object('malloc$of$allocated$read')

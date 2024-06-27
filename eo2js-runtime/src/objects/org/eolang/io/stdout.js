@@ -7,7 +7,7 @@ const at_void = require('../../../../runtime/attribute/at-void');
 /**
  * Stdout.
  * @param {{log: (function(...args: any): void)}} out - Out
- * @return {any} - Stdout object
+ * @returns {any} - Stdout object
  */
 const stdout = function(out = console) {
   const obj = object('stdout')

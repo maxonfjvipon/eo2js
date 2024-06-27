@@ -7,13 +7,13 @@ module.exports = function(grunt) {
         options: {
           timeout: '1200000',
           require: ['test/global.js'],
-          files: ['test/**/*.test.js'],
+          files: ['test/regular.js'],
         },
       },
     },
     eslint: {
       options: {
-        overrideConfigFile: '.eslintrc.json',
+        overrideConfigFile: 'eslint.config.js',
       },
       target: ['Gruntfile.js', 'src/**/*.js', 'test/**/*.js'],
     },

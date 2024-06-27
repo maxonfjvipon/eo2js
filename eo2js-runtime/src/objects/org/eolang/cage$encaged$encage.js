@@ -7,7 +7,7 @@ const {INT, data} = require('../../../runtime/data');
 
 /**
  * Cage.encaged.encage.
- * @return {Object} - Cage.encaged.encage object
+ * @returns {object} - Cage.encaged.encage object
  */
 const cage$encaged$encage = function() {
   const obj = object('cage$encaged$encage')

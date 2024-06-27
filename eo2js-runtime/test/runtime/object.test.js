@@ -10,7 +10,7 @@ const at_rho = require('../../temp/runtime/attribute/at-rho');
 
 describe('object', function() {
   it(`should not have ${RHO} attribute at the beginning`, function() {
-    assert.ok(!object().attrs.hasOwnProperty(RHO))
+    assert.ok(!(RHO in object().attrs))
   })
   it(`should have empty assets`, function() {
     assert.equal(Object.keys(object().assets).length, 0)

@@ -6,7 +6,7 @@ const {data} = require('../../../runtime/data');
 
 /**
  * Bytes.eq.
- * @return {Object} - Bytes.eq object
+ * @returns {object} - Bytes.eq object
  */
 const bytes$eq = function() {
   const obj = object('bytes$eq')

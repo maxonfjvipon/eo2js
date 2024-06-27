@@ -7,7 +7,7 @@ const ErFailure = require('../../../runtime/error/ErFailure');
 
 /**
  * Int.div.
- * @return {any} - Int.div object
+ * @returns {any} - Int.div object
  */
 const int$div = function() {
   const obj = object('int$div')

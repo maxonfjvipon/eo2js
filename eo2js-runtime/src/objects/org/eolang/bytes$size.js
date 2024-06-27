@@ -5,7 +5,7 @@ const dataized = require('../../../runtime/dataized');
 
 /**
  * Bytes.size.
- * @return {Object} - Bytes.size object
+ * @returns {object} - Bytes.size object
  */
 const bytes$size = function() {
   const obj = object('bytes$size')

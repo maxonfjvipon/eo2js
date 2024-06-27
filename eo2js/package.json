@@ -24,13 +24,14 @@
   },
   "devDependencies": {
     "grunt": "^1.6.1",
-    "mocha": "^10.3.0",
+    "mocha": "^10.5.2",
     "xslt3": "^2.6.0",
     "eslint": "9.5.0",
     "eslint-config-google": "0.14.0",
     "grunt-contrib-clean": "2.0.1",
-    "grunt-eslint": "24.3.0",
+    "grunt-eslint": "25.0.0",
     "grunt-mocha-cli": "^7.0.0",
+    "eslint-plugin-jsdoc": "^48.5.0",
     "jspath": "0.4.0"
   }
 }

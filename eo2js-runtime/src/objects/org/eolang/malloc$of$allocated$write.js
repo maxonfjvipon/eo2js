@@ -7,7 +7,7 @@ const dataized = require('../../../runtime/dataized');
 
 /**
  * Malloc.of.allocated.write.
- * @return {Object} - Malloc.of.allocated.write object
+ * @returns {object} - Malloc.of.allocated.write object
  */
 const malloc$of$allocated$write = function() {
   const obj = object('malloc$of$allocated$write')

@@ -4,13 +4,13 @@ const fs = require('fs');
 
 /**
  * Version.
- * @type {null|String}
+ * @type {null|string}
  */
 let ver = null
 
 /**
  * Get EO version.
- * @return {String} - EO version
+ * @returns {string} - EO version
  */
 const version = function() {
   if (ver == null) {
@@ -21,18 +21,19 @@ const version = function() {
 
 /**
  * The shell to use (depending on operating system).
- * @return {String} - Path to shell or "undefined" if default one should be used
+ * @returns {string|undefined} - Path to shell or "undefined" if default one should be used
  */
 function shell() {
   if (process.platform === 'win32') {
     return 'C:\\Windows\\SysWOW64\\WindowsPowerShell\\v1.0\\powershell.exe';
   }
+  return undefined
 }
 
 /**
  * Prepare options for Maven.
- * @param {{sources: String, target: String, home: String}} opts - Options
- * @return {Array.<String>} - Maven options
+ * @param {{sources: string, target: string, home: string}} opts - Options
+ * @returns {Array.<string>} - Maven options
  */
 const flags = function(opts) {
   return [
@@ -44,8 +45,8 @@ const flags = function(opts) {
 
 /**
  * Execute given goals of eo-maven-plugin.
- * @param {Array.<String>} goals - Goals to execute in right order
- * @param {{sources: String, target: String, home: String}} opts - Options
+ * @param {Array.<string>} goals - Goals to execute in right order
+ * @param {{sources: string, target: string, home: string}} opts - Options
  */
 const mvnw = function(goals, opts) {
   const bin = path.resolve(__dirname, 'mvnw') + (process.platform === 'win32' ? '.cmd' : '');

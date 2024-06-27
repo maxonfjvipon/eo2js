@@ -7,7 +7,7 @@ const ErFailure = require('../../../runtime/error/ErFailure');
 
 /**
  * String.slice.
- * @return {Object} - String.slice object
+ * @returns {object} - String.slice object
  */
 const string$slice = function() {
   const obj = object('string$slice')

@@ -6,7 +6,7 @@ const {data} = require('../../../runtime/data');
 
 /**
  * Dataized.
- * @return {Object} - Dataized object
+ * @returns {object} - Dataized object
  */
 const _dataized = function() {
   const obj = object('dataized')

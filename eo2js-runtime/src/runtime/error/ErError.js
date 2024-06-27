@@ -9,7 +9,7 @@ const bytesOf = require('../bytes-of');
 class ErError extends ErAbstract {
   /**
    * Ctor.
-   * @param {Object} enclosure - Enclosure inside the error
+   * @param {object} enclosure - Enclosure inside the error
    */
   constructor(enclosure) {
     super(ErError.safeMessage(enclosure))
@@ -19,15 +19,15 @@ class ErError extends ErAbstract {
 
   /**
    * Retrieve message from enclosure safely.
-   * @param {Object} enclosure - Enclosure inside the error
-   * @return {string}
+   * @param {object} enclosure - Enclosure inside the error
+   * @returns {string} - Safe message
    */
   static safeMessage(enclosure) {
     let result
     try {
       const raw = dataized(enclosure)
       result = `${enclosure.toString()}(${DELTA} = ${bytesOf(raw).verbose()})`
-    } catch (ex) {
+    } catch (_) { /* eslint-disable-line no-unused-vars */
       result = enclosure.toString();
     }
     return result

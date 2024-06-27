@@ -2,7 +2,7 @@
  * Attribute that caches result after get.
  * Resets cache on copying.
  * @param {object} origin - Original attribute
- * @return {Object} - Attribute
+ * @returns {object} - Attribute
  */
 const at_once = function(origin) {
   const cache = {

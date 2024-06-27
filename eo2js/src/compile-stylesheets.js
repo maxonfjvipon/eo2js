@@ -9,27 +9,29 @@ const ext = '.sef.json'
 
 /**
  * Compile style sheet from given source
- * @param {String} source - Source XSL
- * @param {String} dest - Destination
- * @return {String} - Stdout
+ * @param {string} source - Source XSL
+ * @param {string} dest - Destination
+ * @returns {string} - Stdout
  */
 const compile = function(source, dest) {
   console.log(`Recompiling ${source}`)
+  let out = ""
   try {
-    return execSync(
+    out = execSync(
       [
         'node node_modules/xslt3/xslt3.js',
         `-xsl:${source}`,
         `-export:${dest}`
       ].join(' ')
     ).toString()
-  } catch (e) {
+  } catch (_) { /* eslint-disable-line */
   }
+  return out
 }
 
 /**
  * Compile XLS stylesheets to JSON.
- * @param {Array.<String>|undefined} [names] - names of stylesheets to compile
+ * @param {Array.<string>|undefined} [names] - names of stylesheets to compile
  */
 const compileStylesheets = function(names) {
   console.log('Recompiling stylesheets...')

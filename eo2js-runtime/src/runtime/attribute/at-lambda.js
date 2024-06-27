@@ -5,8 +5,8 @@ const {LAMBDA} = require('./specials');
 /**
  * Lazy lambda attribute.
  * @param {object} object - Rho
- * @param {function(self: object): object} callback - Lambda to call
- * @return {Object} Lazy lambda attribute
+ * @param {(self: object) => object} callback - Lambda to call
+ * @returns {object} Lazy lambda attribute
  */
 const at_lambda = function(object, callback) {
   return {

@@ -10,8 +10,8 @@ const {RECURSION_THRESHOLD} = require('../../../../src/runtime/traced');
 
 /**
  * Encaged object.
- * @param {Object} object - Object to encage
- * @return {Object} - Cage
+ * @param {object} object - Object to encage
+ * @returns {object} - Cage
  */
 const encaged = function(object) {
   return phi.take('org.eolang.cage').with({
@@ -21,8 +21,8 @@ const encaged = function(object) {
 
 /**
  * Encage given object to given cage.
- * @param {Object} cage - Cage
- * @param {Object} obj - Object to encage
+ * @param {object} cage - Cage
+ * @param {object} obj - Object to encage
  */
 const encageTo = function(cage, obj) {
   dataized(cage.take('encage').with({
@@ -32,8 +32,8 @@ const encageTo = function(cage, obj) {
 
 /**
  * Dummy object.
- * @param {Number} num
- * @return {Object} - Dummy object
+ * @param {number} num - Number
+ * @returns {object} - Dummy object
  */
 const dummy = function(num) {
   const obj = object('dummy')
@@ -43,9 +43,9 @@ const dummy = function(num) {
 
 /**
  * Recursive dummy.
- * @param {Object} cage - Cage
- * @param {Number} depth - Depth
- * @return {Object} - Recursive dummy
+ * @param {object} cage - Cage
+ * @param {number} depth - Depth
+ * @returns {object} - Recursive dummy
  */
 const recursiveDummy = function(cage, depth) {
   let counter = 0

@@ -1,6 +1,6 @@
 /**
  * Second test.
- * @return {Object} object - Test object
+ * @returns {object} object - Test object
  */
 const second_test = function() {
   const object = require('eo2js-runtime/src/runtime/object')

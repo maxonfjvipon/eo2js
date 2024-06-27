@@ -6,7 +6,7 @@ const ErAbstract = require('./ErAbstract')
 class ErFailure extends ErAbstract {
   /**
    * Ctor.
-   * @param {String} message - Message
+   * @param {string} message - Message
    */
   constructor(message) {
     super(message);

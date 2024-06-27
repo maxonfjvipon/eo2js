@@ -5,7 +5,7 @@ const {data} = require('../../../runtime/data');
 
 /**
  * As_phi.
- * @return {Object} - As_phi object
+ * @returns {object} - As_phi object
  */
 const as_phi = function() {
   const obj = object('as_phi')

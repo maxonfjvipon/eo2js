@@ -6,7 +6,7 @@ const dataized = require('../../../runtime/dataized');
 
 /**
  * Bytes.slice.
- * @return {Object} - Bytes.slice object
+ * @returns {object} - Bytes.slice object
  */
 const bytes$slice = function() {
   const obj = object('bytes$slice')

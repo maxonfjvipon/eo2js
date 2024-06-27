@@ -10,10 +10,10 @@ const with_rho = require('./with-rho');
 /**
  * Try to find an object by given directory and FQN.
  * Context "this" should be set to the object {@link pckg}.
- * @param {String} dir - Relative directory where object may be placed
- * @param {String} name - Name of the current object
- * @param {array.<String>} fqn - Parts of FQN of the object. E.g. ['org', 'eolang', 'int']
- * @return {Object|null} - Found object or null
+ * @param {string} dir - Relative directory where object may be placed
+ * @param {string} name - Name of the current object
+ * @param {Array.<string>} fqn - Parts of FQN of the object. E.g. ['org', 'eolang', 'int']
+ * @returns {object|null} - Found object or null
  */
 const tryFind = function(dir, name, fqn) {
   let obj = null
@@ -37,9 +37,9 @@ const tryFind = function(dir, name, fqn) {
  * we're in the "node_modules" directory (which means, that eo2js-runtime is used as
  * dependency). If so - tries to find object in main project directory.
  * Context "this" should be set to the object {@link pckg}.
- * @param {String} name - Name of the object
- * @param {String} full - FQN of the object
- * @return {Object} - Found object
+ * @param {string} name - Name of the object
+ * @param {string} full - FQN of the object
+ * @returns {object} - Found object
  */
 const found = function(name, full) {
   const split = full.split('.')
@@ -55,9 +55,9 @@ const found = function(name, full) {
 
 /**
  * Package object.
- * @param {String} fqn - FQN of package object
+ * @param {string} fqn - FQN of package object
  * @param {object} rho - Rho
- * @return {object} - Package object
+ * @returns {object} - Package object
  */
 const pckg = function(fqn, rho) {
   const obj = object(`Package '${fqn}'`)
@@ -74,7 +74,7 @@ const pckg = function(fqn, rho) {
   }
   obj.take = function(name) {
     let obj
-    if (this.attrs.hasOwnProperty(name)) {
+    if (Object.hasOwn(this.attrs, name)) {
       obj = with_rho(this.attrs[name].get(), this, name)
     } else if (!name.includes('.')) {
       const before = this.assets[LAMBDA](this)

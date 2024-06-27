@@ -4,8 +4,8 @@ const {EMPTY} = require('./specials');
 /**
  * Void attribute.
  * @param {string} name - Name of the attribute
- * @param {Object} object - Object
- * @return {Object} - Free attribute
+ * @param {object} object - Object
+ * @returns {object} - Free attribute
  */
 const at_void = function(name, object = null) {
   let obj = object

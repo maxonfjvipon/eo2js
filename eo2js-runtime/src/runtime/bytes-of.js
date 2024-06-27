@@ -12,8 +12,8 @@ const BYTE_SIZE = 8
  * to this:
  * [0, 0, 0, 0, 0, 0, 48, 57]
  * If int byte array is provided - return it
- * @param {array.<string>|array.<number>} bytes - Byte array
- * @return {array.<number>} - Int byte array
+ * @param {Array.<string>|Array.<number>} bytes - Byte array
+ * @returns {Array.<number>} - Int byte array
  */
 const hexToInt = function(bytes) {
   let byte
@@ -34,8 +34,8 @@ const hexToInt = function(bytes) {
 /**
  * Adjust byte array for numbers.
  * This is temporary solution that may fail at any moment. Should be removed as soon as possible.
- * @param {Array.<Number>} bytes - Byte array
- * @return {Array.<Number>} - Adjusted byte array
+ * @param {Array.<number>} bytes - Byte array
+ * @returns {Array.<number>} - Adjusted byte array
  */
 const adjustNumber = function(bytes) {
   if (bytes.length === 8) {
@@ -54,23 +54,23 @@ const adjustNumber = function(bytes) {
 
 /**
  * Bytes of.
- * @param {string|number|BigInt|boolean|array.<string>|array.<number>} data - Data to cast to bytes
- * @return {{
- *  asInt: (function(): BigInt),
- *  asBool: (function(): boolean),
- *  asString: (function(): string),
- *  asFloat: (function(): number),
- *  asBytes: (function(): array.<number>),
- *  verbose: (function(): string),
- *  and: (function(other: Array.<Number>): object),
- *  or: (function(other: Array.<Number>): object),
- *  xor: (function(other: Array.<Number>): object),
- *  not: (function(): object),
- *  shift: (function(Number): object)
+ * @param {string|number|bigint|boolean|Array.<string>|Array.<number>} data - Data to cast to bytes
+ * @returns {{
+ *  asInt: () => bigint,
+ *  asBool: () => boolean,
+ *  asString: () => string,
+ *  asFloat: () => number,
+ *  asBytes: () => Array.<number>,
+ *  verbose: () => string,
+ *  and: (other: Array.<number>) => object,
+ *  or: (other: Array.<number>) => object,
+ *  xor: (other: Array.<number>) => object,
+ *  not: () => object,
+ *  shift: (number) => object
  * }} - Bytes converter
  * @todo #3:30min Fix bytes converting for integers. There are some differences between how Java
  *  generate byte array from integers and JS. For example we get the number -18 in XMIR as
- *  ['0xFF', '0xFF', '0xFF', '0xFF', '0xFF', '0xFF', '0xFF', '0xEE'] byte array. After it cast from
+ *  ['0xFF', '0xFF', '0xFF', '0xFF', '0xFF', '0xFF', '0xFF', '0xEE'] byte Array. After it cast from
  *  hex to int it looks like: [255, 255, 255, 255, 255, 255, 255, 238]. But when we do
  *  {@code bytesOf(-18).asBytes()} we get [-1, -1, -1,  -1, -1, -1, -1, -72]. Technically - these
  *  arrays are the same because they'll converted to the same integer value -18. But at the level of
@@ -101,14 +101,14 @@ const bytesOf = function(data) {
   return {
     /**
      * Get byte array.
-     * @return {Array.<Number>} - Byte array
+     * @returns {Array.<number>} - Byte array
      */
     asBytes: function() {
       return bytes
     },
     /**
      * Convert bytes to integer.
-     * @return {BigInt} - Integer number
+     * @returns {bigint} - Integer number
      */
     asInt: function() {
       if (bytes.length !== 8) {
@@ -118,7 +118,7 @@ const bytesOf = function(data) {
     },
     /**
      * Convert bytes to float.
-     * @return {number} - Float number
+     * @returns {number} - Float number
      */
     asFloat: function() {
       if (bytes.length !== 8) {
@@ -128,14 +128,14 @@ const bytesOf = function(data) {
     },
     /**
      * Convert bytes to string
-     * @return {string} - String number
+     * @returns {string} - String number
      */
     asString: function() {
       return Buffer.from(bytes).toString('utf-8')
     },
     /**
      * Convert bytes to bool.
-     * @return {boolean} - Boolean
+     * @returns {boolean} - Boolean
      */
     asBool: function() {
       if (bytes.length !== 1) {
@@ -145,7 +145,7 @@ const bytesOf = function(data) {
     },
     /**
      * Get verbose bytes string representation depends on its length
-     * @return {string} - Verbose string representation of bytes
+     * @returns {string} - Verbose string representation of bytes
      */
     verbose: function() {
       let str
@@ -168,20 +168,20 @@ const bytesOf = function(data) {
     },
     /**
      * Logical AND.
-     * @param {Array.<Number>} other - Other byte array
-     * @return {{
-     *  asInt: (function(): BigInt),
-     *  asBool: (function(): boolean),
-     *  asString: (function(): string),
-     *  asFloat: (function(): number),
-     *  asBytes: (function(): Array<number>),
-     *  verbose: (function(): string),
-     *  and: (function(Array.<Number>): Object),
-     *  or: (function(Array.<Number>): Object),
-     *  xor: (function(Array.<Number>): Object),
-     *  not: (function(): object),
-     *  shift: (function(Number): Object)
-     * }}
+     * @param {Array.<number>} other - Other byte array
+     * @returns {{
+     *  asInt: () => bigint,
+     *  asBool: () => boolean,
+     *  asString: () => string,
+     *  asFloat: () => number,
+     *  asBytes: () => Array.<number>,
+     *  verbose: () => string,
+     *  and: (other: Array.<number>) => object,
+     *  or: (other: Array.<number>) => object,
+     *  xor: (other: Array.<number>) => object,
+     *  not: () => object,
+     *  shift: (number) => object
+     * }} - Bytes after AND.
      */
     and: function(other) {
       const copy = bytes
@@ -192,20 +192,20 @@ const bytesOf = function(data) {
     },
     /**
      * Logical OR.
-     * @param {Array.<Number>} other - Other byte array
-     * @return {{
-     *  asInt: (function(): BigInt),
-     *  asBool: (function(): boolean),
-     *  asString: (function(): string),
-     *  asFloat: (function(): number),
-     *  asBytes: (function(): Array<number>),
-     *  verbose: (function(): string),
-     *  and: (function(Array.<Number>): Object),
-     *  or: (function(Array.<Number>): Object),
-     *  xor: (function(Array.<Number>): Object),
-     *  not: (function(): object),
-     *  shift: (function(Number): Object)
-     * }}
+     * @param {Array.<number>} other - Other byte array
+     * @returns {{
+     *  asInt: () => bigint,
+     *  asBool: () => boolean,
+     *  asString: () => string,
+     *  asFloat: () => number,
+     *  asBytes: () => Array.<number>,
+     *  verbose: () => string,
+     *  and: (other: Array.<number>) => object,
+     *  or: (other: Array.<number>) => object,
+     *  xor: (other: Array.<number>) => object,
+     *  not: () => object,
+     *  shift: (number) => object
+     * }} - Bytes after OR.
      */
     or: function(other) {
       const copy = bytes
@@ -216,20 +216,20 @@ const bytesOf = function(data) {
     },
     /**
      * XOR.
-     * @param {Array.<Number>} other - Other byte array
-     * @return {{
-     *  asInt: (function(): BigInt),
-     *  asBool: (function(): boolean),
-     *  asString: (function(): string),
-     *  asFloat: (function(): number),
-     *  asBytes: (function(): Array<number>),
-     *  verbose: (function(): string),
-     *  and: (function(Array.<Number>): Object),
-     *  or: (function(Array.<Number>): Object),
-     *  xor: (function(Array.<Number>): Object),
-     *  not: (function(): object),
-     *  shift: (function(Number): Object)
-     * }}
+     * @param {Array.<number>} other - Other byte array
+     * @returns {{
+     *  asInt: () => bigint,
+     *  asBool: () => boolean,
+     *  asString: () => string,
+     *  asFloat: () => number,
+     *  asBytes: () => Array.<number>,
+     *  verbose: () => string,
+     *  and: (other: Array.<number>) => object,
+     *  or: (other: Array.<number>) => object,
+     *  xor: (other: Array.<number>) => object,
+     *  not: () => object,
+     *  shift: (number) => object
+     * }} - Bytes after XOR.
      */
     xor: function(other) {
       const copy = bytes
@@ -240,19 +240,19 @@ const bytesOf = function(data) {
     },
     /**
      * Logical NOT.
-     * @return {{
-     *  asInt: (function(): BigInt),
-     *  asBool: (function(): boolean),
-     *  asString: (function(): string),
-     *  asFloat: (function(): number),
-     *  asBytes: (function(): Array<number>),
-     *  verbose: (function(): string),
-     *  and: (function(Array.<Number>): Object),
-     *  or: (function(Array.<Number>): Object),
-     *  xor: (function(Array.<Number>): Object),
-     *  not: (function(): object),
-     *  shift: (function(Number): Object)
-     * }}
+     * @returns {{
+     *  asInt: () => bigint,
+     *  asBool: () => boolean,
+     *  asString: () => string,
+     *  asFloat: () => number,
+     *  asBytes: () => Array.<number>,
+     *  verbose: () => string,
+     *  and: (other: Array.<number>) => object,
+     *  or: (other: Array.<number>) => object,
+     *  xor: (other: Array.<number>) => object,
+     *  not: () => object,
+     *  shift: (number) => object
+     * }} - Bytes after negation.
      */
     not: function() {
       const copy = bytes
@@ -265,20 +265,20 @@ const bytesOf = function(data) {
      * Big-endian unsigned shift.
      * Shifts left if value is positive, or right otherwise.
      * Does not perform sign extension.
-     * @param {Number} bits - Bits amount
-     * @return {{
-     *  asInt: (function(): BigInt),
-     *  asBool: (function(): boolean),
-     *  asString: (function(): string),
-     *  asFloat: (function(): number),
-     *  asBytes: (function(): Array<number>),
-     *  verbose: (function(): string),
-     *  and: (function(Array.<Number>): Object),
-     *  or: (function(Array.<Number>): Object),
-     *  xor: (function(Array.<Number>): Object),
-     *  not: (function(): object),
-     *  shift: (function(Number): Object)
-     * }}
+     * @param {number} bits - Bits amount
+     * @returns {{
+     *  asInt: () => bigint,
+     *  asBool: () => boolean,
+     *  asString: () => string,
+     *  asFloat: () => number,
+     *  asBytes: () => Array.<number>,
+     *  verbose: () => string,
+     *  and: (other: Array.<number>) => object,
+     *  or: (other: Array.<number>) => object,
+     *  xor: (other: Array.<number>) => object,
+     *  not: () => object,
+     *  shift: (number) => object
+     * }} - Bytes after shift.
      */
     shift: function(bits) {
       bits = Number(bits)

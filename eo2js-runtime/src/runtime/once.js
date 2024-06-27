@@ -1,7 +1,7 @@
 /**
  * Evaluate object lazily only once.
  * @param {function(): object} callback - Function to evaluate
- * @return {Object} - Lazily evaluated object
+ * @returns {object} - Lazily evaluated object
  */
 const once = function(callback) {
   let cached = null

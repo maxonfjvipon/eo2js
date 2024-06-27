@@ -7,7 +7,7 @@ const trapped = require('../../../runtime/trapped');
 
 /**
  * Try.
- * @return {Object} - Try object
+ * @returns {object} - Try object
  */
 const _try = function() {
   const obj = object('try')

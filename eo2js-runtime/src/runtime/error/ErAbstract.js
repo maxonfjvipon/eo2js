@@ -4,7 +4,7 @@
 class ErAbstract extends Error {
   /**
    * Ctor.
-   * @param {String} message - Cause.
+   * @param {string} message - Cause.
    */
   constructor(message) {
     super(message)

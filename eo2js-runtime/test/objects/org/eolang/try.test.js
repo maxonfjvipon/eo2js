@@ -17,8 +17,8 @@ const MESSAGE = 'something is broken'
 
 /**
  * Broken object that throws {@link ErFailure}.
- * @param {String} name - Name of the attribute or asset
- * @return {Object} - Broken
+ * @param {string} name - Name of the attribute or asset
+ * @returns {object} - Broken
  */
 const broken = function(name) {
   const obj = object('broken')
@@ -36,7 +36,7 @@ const broken = function(name) {
 
 /**
  * Not broken main object for try.
- * @return {Object} - Object
+ * @returns {object} - Object
  */
 const main = function() {
   const obj = object('main')
@@ -46,7 +46,7 @@ const main = function() {
 
 /**
  * Catcher.
- * @return {Object} - Catcher
+ * @returns {object} - Catcher
  */
 const catcher = function() {
   const obj = object('catcher')
@@ -57,7 +57,7 @@ const catcher = function() {
 
 /**
  * Nop.
- * @return {Object} - Nop
+ * @returns {object} - Nop
  */
 const nop = function() {
   const obj = object('nop')
@@ -67,9 +67,9 @@ const nop = function() {
 
 /**
  * Build try object.
- * @param {Object} main - Main attribute
- * @param {Object} [final] - Finally attribute
- * @return {Object} - Try object
+ * @param {object} main - Main attribute
+ * @param {object} [final] - Finally attribute
+ * @returns {object} - Try object
  */
 const tryObj = function(main, final) {
   return tr().with({

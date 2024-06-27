@@ -19,11 +19,11 @@ const DATAIZING_CAGES = {}
 
 /**
  * Increment counter of cage in the {@link DATAIZING_CAGES}.
- * @param {Number} locator - Locator of the cage
- * @param {Number} depth - Depth of cage recursion
+ * @param {number} locator - Locator of the cage
+ * @param {number} depth - Depth of cage recursion
  */
 const increment = function(locator, depth) {
-  if (!DATAIZING_CAGES.hasOwnProperty(locator)) {
+  if (!Object.hasOwn(DATAIZING_CAGES, locator)) {
     DATAIZING_CAGES[locator] = 1
   } else {
     DATAIZING_CAGES[locator] = DATAIZING_CAGES[locator] + 1
@@ -37,10 +37,10 @@ const increment = function(locator, depth) {
 
 /**
  * Decrement counter of cage in the {@link DATAIZING_CAGES}.
- * @param {Number} locator - Locator of the cage
+ * @param {number} locator - Locator of the cage
  */
 const decrement = function(locator) {
-  if (DATAIZING_CAGES.hasOwnProperty(locator)) {
+  if (Object.hasOwn(DATAIZING_CAGES, locator)) {
     const count = DATAIZING_CAGES[locator] - 1
     if (count === 0) {
       delete DATAIZING_CAGES[locator]
@@ -52,10 +52,10 @@ const decrement = function(locator) {
 
 /**
  * Object that traces if the "cage.new" got into recursion during the dataization.
- * @param {Object} object - Encaged object
- * @param {Number} locator - Locator of the object
- * @param {Number} depth - Max depth of cage recursion
- * @return {Object}
+ * @param {object} object - Encaged object
+ * @param {number} locator - Locator of the object
+ * @param {number} depth - Max depth of cage recursion
+ * @returns {object} - Traced object
  */
 const traced = function(object, locator, depth = RECURSION_THRESHOLD) {
   return trapped(

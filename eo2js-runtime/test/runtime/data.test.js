@@ -3,12 +3,15 @@ const {data, INT, STRING, FLOAT, BOOL} = require('../../temp/runtime/data')
 const dataized = require('../../temp/runtime/dataized');
 
 const isObject = function(obj) {
-  return obj.hasOwnProperty('attrs') &&
-    obj.hasOwnProperty('assets') &&
-    obj.hasOwnProperty('take') &&
-    obj.hasOwnProperty('copy') &&
-    obj.hasOwnProperty('with') &&
-    obj.hasOwnProperty('toString')
+  return Object.hasOwn(obj, 'attrs') &&
+    Object.hasOwn(obj, 'assets') &&
+    Object.hasOwn(obj, 'take') &&
+    Object.hasOwn(obj, 'copy') &&
+    Object.hasOwn(obj, 'with') &&
+    Object.hasOwn(obj, 'data') &&
+    Object.hasOwn(obj, 'forma') &&
+    Object.hasOwn(obj, 'φTerm') &&
+    Object.hasOwn(obj, 'toString')
 }
 
 describe('data', function() {

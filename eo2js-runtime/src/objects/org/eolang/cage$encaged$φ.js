@@ -7,7 +7,7 @@ const cages = require('../../../runtime/cages');
 
 /**
  * Cage.encaged.φ.
- * @return {Object} - Cage.encaged.φ object
+ * @returns {object} - Cage.encaged.φ object
  */
 const cage$encaged$φ = function() {
   const obj = object('cage$encaged$φ')

@@ -6,7 +6,7 @@ const dataized = require('../../../runtime/dataized');
 
 /**
  * Bytes.concat.
- * @return {Object} - Bytes.concat object
+ * @returns {object} - Bytes.concat object
  */
 const bytes$concat = function() {
   const obj = object('bytes$concat')

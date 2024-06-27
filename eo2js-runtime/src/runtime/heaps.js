@@ -15,21 +15,21 @@ let identifier = 0
 /**
  * Dynamic memory.
  * @type {{
- *  malloc: function(Number): number,
- *  read: function(Number, Number, Number): Array.<Number>,
- *  free: function(Number),
- *  write: function(Number, Number, Array.<Number>)
+ *  malloc: (number) => number,
+ *  read: (number, number, number) => Array.<number>,
+ *  free: (number) => void,
+ *  write: (number, number, data: Array.<number>) => void
  * }}
  */
 const heaps = {
   /**
    * Allocate block in memory of given size.
-   * @param {Number} size - Size of the block to allocate
-   * @return {Number} - Identifier of allocated block
+   * @param {number} size - Size of the block to allocate
+   * @returns {number} - Identifier of allocated block
    */
   malloc: function(size) {
     const id = ++identifier
-    if (BLOCKS.hasOwnProperty(id)) {
+    if (Object.hasOwn(BLOCKS, id)) {
       throw new ErFailure(
         `Can't allocate block in memory with identifier ${id} because it's already allocated`
       )
@@ -39,12 +39,12 @@ const heaps = {
   },
   /**
    * Write given data to the block in memory by given identifier.
-   * @param {Number} id - Identifier
-   * @param {Number} offset - Offset
-   * @param {Array.<Number>} data - Data tto write
+   * @param {number} id - Identifier
+   * @param {number} offset - Offset
+   * @param {Array.<number>} data - Data tto write
    */
   write: function(id, offset, data) {
-    if (!BLOCKS.hasOwnProperty(id)) {
+    if (!Object.hasOwn(BLOCKS, id)) {
       throw new ErFailure(
         `Can't read a block in memory with identifier ${id} because it's not allocated`,
       )
@@ -72,13 +72,13 @@ const heaps = {
   },
   /**
    * Get data from the block in memory by identifier.
-   * @param {Number} id - Identifier
-   * @param {Number} offset - Offset
-   * @param {Number} length - Length
-   * @return {Array.<Number>} - Data from the block in memory
+   * @param {number} id - Identifier
+   * @param {number} offset - Offset
+   * @param {number} length - Length
+   * @returns {Array.<number>} - Data from the block in memory
    */
   read: function(id, offset, length) {
-    if (!BLOCKS.hasOwnProperty(id)) {
+    if (!Object.hasOwn(BLOCKS, id)) {
       throw new ErFailure(
         `Block in memory by identifier ${id} is not allocated, can't read`,
       );
@@ -93,10 +93,10 @@ const heaps = {
   },
   /**
    * Free the block in memory by identifier.
-   * @param {Number} id - Identifier of pointer
+   * @param {number} id - Identifier of pointer
    */
   free: function(id) {
-    if (!BLOCKS.hasOwnProperty(id)) {
+    if (!Object.hasOwn(BLOCKS, id)) {
       throw new ErFailure(
         `Can't free a block in memory with identifier ${id} because it's not allocated`,
       );

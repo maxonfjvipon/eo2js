@@ -12,9 +12,9 @@ const main = '__main__.js'
 /**
  * Data to insert to package.json file.
  * If path to local dependency is present - eo2js-runtime dependency won't be added.
- * @param {String} [runtime] - Path to local eo-runtime dependency
+ * @param {string} [runtime] - Path to local eo-runtime dependency
  * @param {boolean} [tests] - Add dependencies for testing
- * @return {{author: string, name: string, version: string}} - The content for package.json file
+ * @returns {{author: string, name: string, version: string}} - The content for package.json file
  */
 const pckg = function(runtime, tests) {
   const def = {
@@ -41,7 +41,7 @@ const pckg = function(runtime, tests) {
 
 /**
  * Build npm project.
- * @param {{target: String, project: String, resources: String, dependency: ?String, tests: ?boolean}} options - Program options
+ * @param {{target: string, project: string, resources: string, dependency: ?string, tests: ?boolean}} options - Program options
  */
 const link = function(options) {
   options = {...program.opts(), ...options}

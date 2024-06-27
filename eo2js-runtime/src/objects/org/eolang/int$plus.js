@@ -6,7 +6,7 @@ const at_void = require('../../../runtime/attribute/at-void')
 
 /**
  * Int.plus.
- * @return {any} - Int.plus object
+ * @returns {any} - Int.plus object
  */
 const int$plus = function() {
   const obj = object('int$plus')

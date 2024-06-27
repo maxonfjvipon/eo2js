@@ -2,7 +2,7 @@
  * Fake CAGE EO object that is used for the test purposes.
  * Don't change the file until you definitely know what you're doing.
  * For more information please read README.md in test/fake folder
- * @return {Object} - Object
+ * @returns {object} - Object
  */
 const cage = function() {
   const object = require('../../../runtime/object')
@@ -39,7 +39,7 @@ const cage = function() {
  * Fake CAGE.ENCAGED EO object that is used for the test purposes.
  * Don't change the file until you definitely know what you're doing.
  * For more information please read README.md in test/fake folder
- * @return {Object} - Object
+ * @returns {object} - Object
  */
 const cage$encaged = function() {
   const object = require('../../../runtime/object')

@@ -1,6 +1,6 @@
 /**
  * Object for testing dataization.
- * @return {Object} object - Test object
+ * @returns {object} object - Test object
  */
 const app = function() {
   const object = require('eo2js-runtime/src/runtime/object')

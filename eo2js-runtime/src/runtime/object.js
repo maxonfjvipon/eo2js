@@ -14,8 +14,8 @@ let vertex = 0
 
 /**
  * Object.
- * @param {String} name - Name of the object
- * @return {object} Object
+ * @param {string} name - Name of the object
+ * @returns {object} Object
  */
 const object = function(name = 'object') {
   const vtx = ++vertex
@@ -30,7 +30,7 @@ const object = function(name = 'object') {
     assets: {},
     /**
      * Copy itself.
-     * @return {Object} - Copied object.
+     * @returns {object} - Copied object.
      */
     copy: function() {
       const copy = object(name)
@@ -46,8 +46,8 @@ const object = function(name = 'object') {
     },
     /**
      * Set attributes or {@see DELTA} asset to the object.
-     * @param {Object} bindings - Attribute bindings
-     * @return {Object} - Self with attached attributes
+     * @param {object} bindings - Attribute bindings
+     * @returns {object} - Self with attached attributes
      * @throws ErFailure - If something wrong with bindings
      */
     with: function(bindings) {
@@ -83,32 +83,32 @@ const object = function(name = 'object') {
     },
     /**
      * Retrieve object by attribute/asset name
-     * @param {String} name - Attribute/asset name
-     * @return {Object} - Retrieved attribute/asset by name
+     * @param {string} name - Attribute/asset name
+     * @returns {object} - Retrieved attribute/asset by name
      * @throws ErFailure - If something wrong with attribute/asset retrieving
      */
     take: function(name) {
       name = String(name)
       let object
-      if (name === RHO && !this.attrs.hasOwnProperty(RHO)) {
+      if (name === RHO && !Object.hasOwn(this.attrs, RHO)) {
         object = at_rho().get()
       } else if (name === LAMBDA) {
-        if (this.attrs.hasOwnProperty(LAMBDA)) {
+        if (Object.hasOwn(this.attrs, LAMBDA)) {
           throw new ErFailure(`'${LAMBDA}' can't be used as attribute, only as asset`)
         }
-        if (!this.assets.hasOwnProperty(LAMBDA)) {
+        if (!Object.hasOwn(this.assets, LAMBDA)) {
           throw new ErFailure(`Can't take '${LAMBDA}' asset because it's absent`)
         }
         object = validated(
           () => safe(with_rho(this.assets[LAMBDA](this), this, name))
         )
-      } else if (this.attrs.hasOwnProperty(name)) {
+      } else if (Object.hasOwn(this.attrs, name)) {
         object = validated(
           () => safe(with_rho(this.attrs[name].get(), this, name))
         )
-      } else if (this.attrs.hasOwnProperty(PHI)) {
+      } else if (Object.hasOwn(this.attrs, PHI)) {
         object = this.take(PHI).take(name)
-      } else if (this.assets.hasOwnProperty(LAMBDA)) {
+      } else if (Object.hasOwn(this.assets, LAMBDA)) {
         object = this.take(LAMBDA).take(name)
       } else {
         throw new ErFailure(`Can't find '${name}' attribute in '${this.toString()}'`)
@@ -117,15 +117,15 @@ const object = function(name = 'object') {
     },
     /**
      * Retrieve data from the object
-     * @return {Array.<Number>} - Data
+     * @returns {Array.<number>} - Data
      */
     data: function() {
       let data
-      if (this.assets.hasOwnProperty(DELTA)) {
+      if (Object.hasOwn(this.assets, DELTA)) {
         data = this.assets[DELTA]
-      } else if (this.assets.hasOwnProperty(LAMBDA)) {
+      } else if (Object.hasOwn(this.assets, LAMBDA)) {
         data = this.take(LAMBDA).data()
-      } else if (this.attrs.hasOwnProperty(PHI)) {
+      } else if (Object.hasOwn(this.attrs, PHI)) {
         data = this.take(PHI).data()
       } else {
         throw new ErFailure(`There's no data in the object ${this.toString()}, can't take it`)
@@ -134,14 +134,14 @@ const object = function(name = 'object') {
     },
     /**
      * Print itself.
-     * @return {String} - String representation of object
+     * @returns {string} - String representation of object
      */
     toString: function() {
       return `${name}ν${vtx}`
     },
     /**
      * Forma of itself.
-     * @return {String} - Forma
+     * @returns {string} - Forma
      * @todo #61:30min Make forma contained full FQN of the object. Now forma of the object is the
      *  last part of its FQN. For example, if object is 'org.eolang.int', it's forma is 'int' which
      *  is wrong, it should be 'org.eolang.int'. So we need to fix this naming and make sure
@@ -152,15 +152,15 @@ const object = function(name = 'object') {
     },
     /**
      * Represent self as φ term.
-     * @return {String} - Self as φ calculus term
+     * @returns {string} - Self as φ calculus term
      */
     φTerm: function() {
       const list = []
       const binding = (left, right) => `${left} ↦ ${right}`
-      if (this.assets.hasOwnProperty(DELTA)) {
+      if (Object.hasOwn(this.assets, DELTA)) {
         list.push(binding(DELTA, `[${this.assets[DELTA].join(', ')}]`))
       }
-      if (this.assets.hasOwnProperty(LAMBDA)) {
+      if (Object.hasOwn(this.assets, LAMBDA)) {
         list.push(binding(LAMBDA, 'Lambda'))
       }
       list.push(

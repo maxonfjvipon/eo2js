@@ -7,7 +7,7 @@ const dataized = require('../../../runtime/dataized');
 
 /**
  * Bytes.or.
- * @return {Object} - Bytes.or object
+ * @returns {object} - Bytes.or object
  */
 const bytes$or = function() {
   const obj = object('bytes$or')

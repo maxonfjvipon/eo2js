@@ -4,8 +4,8 @@ const at_term = require('./at-term');
 
 /**
  * Attribute that keeps \rho.
- * @param {Object} [object] - Rho object
- * @return {Object} - Rho attribute
+ * @param {object} [object] - Rho object
+ * @returns {object} - Rho attribute
  */
 const at_rho = function(object = null) {
   let rho = object

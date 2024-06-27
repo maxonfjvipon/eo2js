@@ -4,7 +4,7 @@ const {execSync} = require('child_process')
 
 /**
  * Test command.
- * @param {{target: String, project: String, exclude: String}} options - Program options
+ * @param {{target: string, project: string, exclude: string}} options - Program options
  */
 const test = function(options) {
   options = {...program.opts(), ...options}

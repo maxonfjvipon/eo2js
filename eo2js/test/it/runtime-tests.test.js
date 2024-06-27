@@ -18,8 +18,8 @@ const exclude = [
 
 /**
  * Read all files from given directory.
- * @param {String} dir - Directory
- * @return {Array.<String>} - Files from the directory
+ * @param {string} dir - Directory
+ * @returns {Array.<string>} - Files from the directory
  */
 const allFilesFrom = function(dir) {
   const files = fs.readdirSync(dir, {withFileTypes: true});

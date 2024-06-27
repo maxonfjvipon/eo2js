@@ -17,7 +17,7 @@ describe('package object', function() {
       assert.deepStrictEqual(phi.take('').take(RHO), phi)
     })
     it(`should have ${RHO} attribute`, function() {
-      assert.ok(pckg('', {}).attrs.hasOwnProperty(RHO))
+      assert.ok(RHO in pckg('', {}).attrs)
     })
     describe('#take()', function() {
       it('should return next level package object', function() {
@@ -90,7 +90,7 @@ describe('package object', function() {
   describe('"org"', function() {
     it(`should have ${RHO} attributes`, function() {
       const obj = pckg('', {}).take('org')
-      assert.ok(obj.attrs.hasOwnProperty(RHO))
+      assert.ok(RHO in obj.attrs)
     })
     describe('#with()', function() {
       it('should fail on put', function() {

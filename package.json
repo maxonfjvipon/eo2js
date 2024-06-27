@@ -15,7 +15,7 @@
     "postinstall": "npm run install-eo2js && npm run install-eo2js-runtime",
     "test-eo2js": "cd eo2js && grunt",
     "test-eo2js-runtime": "cd eo2js-runtime && grunt",
-    "test": "npm run test-eo2js && npm run test-eo2js-runtime"
+    "test": "npm run test-eo2js-runtime && npm run test-eo2js"
   },
   "author": "maxonfjvipon",
   "license": "MIT"

@@ -6,7 +6,7 @@ const at_void = require('../../../runtime/attribute/at-void')
 
 /**
  * Float.gt.
- * @return {any} - Float.gt object
+ * @returns {any} - Float.gt object
  */
 const float$gt = function() {
   const obj = object('float$gt')

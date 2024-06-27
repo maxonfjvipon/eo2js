@@ -1,7 +1,7 @@
 /**
  * Attribute as φTerm.
- * @param {Object} origin - Original attribute
- * @return {Object} - Attribute with default φTerm
+ * @param {object} origin - Original attribute
+ * @returns {object} - Attribute with default φTerm
  */
 const at_term = function(origin) {
   return {

@@ -4,9 +4,9 @@ const {execSync} = require('child_process')
 
 /**
  * Dataize command.
- * @param {String} obj - Entry object
- * @param {Array..<String>} args - EO program arguments
- * @param {{target: String, project: String}} options - Program options
+ * @param {string} obj - Entry object
+ * @param {Array.<string>} args - EO program arguments
+ * @param {{target: string, project: string}} options - Program options
  */
 const dataize = function(obj, args, options) {
   options = {...program.opts(), ...options}

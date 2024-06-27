@@ -12,8 +12,8 @@ describe('link', function() {
   })
   /**
    * Run "link" command.
-   * @param {String} [args] - Arguments
-   * @return {String} - Stdout.
+   * @param {string} [args] - Arguments
+   * @returns {string} - Stdout.
    */
   const link = function(...args) {
     return runSync([

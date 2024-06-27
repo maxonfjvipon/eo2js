@@ -37,8 +37,8 @@ describe('transpile', function() {
     })
     /**
      * Call transpile command.
-     * @param {String} name - Name of the object to transpile
-     * @return {String} - Stdout
+     * @param {string} name - Name of the object to transpile
+     * @returns {string} - Stdout
      */
     const transpile = function(name = 'simple') {
       const verified = path.resolve(target, `6-verify/com/eo2js/${name}.xmir`)

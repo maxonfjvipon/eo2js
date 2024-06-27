@@ -6,7 +6,7 @@ const ErFailure = require('./error/ErFailure');
  * Dataized.
  * @param {object} object - Object to dataize
  * @param {string} [type] - Type to cast to
- * @return {string|number|BigInt|boolean|array.<number>} - Data
+ * @returns {string|number|bigint|boolean|Array.<number>} - Data
  */
 const dataized = function(object, type) {
   const bytes = bytesOf(object.data())

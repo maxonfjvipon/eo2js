@@ -1,8 +1,8 @@
 /**
  * Trap for the functions of the object.
  * @param {any} object - Object
- * @param {function(property: String, target: any, thisArg: any, args: any[]): any} apply - Function that overrides the default one
- * @return {Object} - Trapped object
+ * @param {(property: string, target: any, thisArg: any, args: any[]) => any} apply - Function that overrides the default one
+ * @returns {object} - Trapped object
  */
 const trapped = function(object, apply) {
   return new Proxy(

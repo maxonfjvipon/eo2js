@@ -6,7 +6,7 @@ const at_void = require('../../../runtime/attribute/at-void')
 
 /**
  * Int.times.
- * @return {any} - Int.times object
+ * @returns {any} - Int.times object
  */
 const int$times = function() {
   const obj = object('int$times')

@@ -9,11 +9,10 @@ const jp = require('jspath')
 
 /**
  * Execute JS file with node.
- *
- * @param {String} js - JS file to execute
- * @param {Array.<String>} args - Arguments
+ * @param {string} js - JS file to execute
+ * @param {Array.<string>} args - Arguments
  * @param {boolean} print - Capture logs or not
- * @return {string} Stdout
+ * @returns {string} Stdout
  */
 const execNode = function(js, args, print) {
   try {
@@ -22,7 +21,7 @@ const execNode = function(js, args, print) {
       {
         timeout: 1200000,
         windowsHide: true,
-        stdio: print ? null : 'ignore'
+        stdio: print ? null : 'ignore',
       }
     ).toString()
   } catch (ex) {
@@ -33,10 +32,9 @@ const execNode = function(js, args, print) {
 
 /**
  * Helper to run eo2js command line tool.
- *
  * @param {Array.<string>} args - Array of args
- * @param {Boolean} print - Capture logs
- * @return {String} Stdout
+ * @param {boolean} print - Capture logs
+ * @returns {string} Stdout
  */
 const runSync = function(args, print = true) {
   return execNode(path.resolve('./src/eo2js.js'), args, print)
@@ -44,9 +42,8 @@ const runSync = function(args, print = true) {
 
 /**
  * Assert that all files exist.
- *
- * @param {String} stdout - The stdout printed
- * @param {String} home - The location of files to match
+ * @param {string} stdout - The stdout printed
+ * @param {string} home - The location of files to match
  * @param {Array} paths - Array of file paths
  */
 const assertFilesExist = function(stdout, home, paths) {
@@ -67,8 +64,8 @@ const parser = new XMLParser({ignoreAttributes: false})
 
 /**
  * Transformations test pack.
- * @param {{home: String, sources: String, target: String, json: Object}} params - Pack params
- * @return {{skip: boolean, failures: array.<String>, xmir: String, json: Object}} - Output
+ * @param {{home: string, sources: string, target: string, json: object}} params - Pack params
+ * @returns {{skip: boolean, failures: Array.<string>, xmir: string, json: object}} - Output
  */
 const pack = function(params) {
   const res = {

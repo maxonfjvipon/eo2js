@@ -22,8 +22,8 @@ const dir = '8-transpile'
  * - name org.eolang.int + pckg '' -> path org/eolang/int
  * - name org.eolang.int.test + pckg org.eolang -> path org/eolang/int.test
  * If name ends with ".test" and package
- * @param {String} name - Name of the object. May contain dots
- * @return {String} - path from object name
+ * @param {string} name - Name of the object. May contain dots
+ * @returns {string} - path from object name
  */
 const pathFromName = function(name) {
   return name.replace(/\./g, path.sep)
@@ -31,7 +31,7 @@ const pathFromName = function(name) {
 
 /**
  * Make directory if not exist.
- * @param {String} dir - Directory
+ * @param {string} dir - Directory
  */
 const makeDirIfNotExist = function(dir) {
   if (!fs.existsSync(dir)) {
@@ -42,15 +42,15 @@ const makeDirIfNotExist = function(dir) {
 /**
  * Check if given XMIR has meta.
  * @param {any} xmir - XMIR
- * @param {String} name - Name of the meta
- * @return {boolean} - If given XMIR has tests meta or not
+ * @param {string} name - Name of the meta
+ * @returns {boolean} - If given XMIR has tests meta or not
  */
 const hasMeta = function(xmir, name) {
   const metas = xmir.program.metas.meta
   let res = false
   if (Array.isArray(metas)) {
     res = metas.findIndex((meta) => meta.head === name) !== -1
-  } else if (typeof metas === 'object' && metas.hasOwnProperty('head')) {
+  } else if (typeof metas === 'object' && Object.hasOwn(metas, 'head')) {
     res = metas.head === name
   }
   return res
@@ -58,9 +58,9 @@ const hasMeta = function(xmir, name) {
 
 /**
  * Transform XMIR from given tojo and save.
- * @param {Object} tojo - Tojo.
- * @param {{target: String, project: String}} options - Program options
- * @param {Array.<String>} transformations - List of transformations to apply to XMIR
+ * @param {object} tojo - Tojo.
+ * @param {{target: string, project: string}} options - Program options
+ * @param {Array.<string>} transformations - List of transformations to apply to XMIR
  * @param {any} parser - XML parser
  */
 const transform = function(tojo, options, transformations, parser) {
@@ -84,7 +84,7 @@ const transform = function(tojo, options, transformations, parser) {
   if (!Array.isArray(objects)) {
     objects = [objects]
   }
-  const filtered = objects.filter((obj) => !!obj && obj.hasOwnProperty('javascript') && !obj.hasOwnProperty('@_atom'))
+  const filtered = objects.filter((obj) => !!obj && Object.hasOwn(obj, 'javascript') && !Object.hasOwn(obj, '@_atom'))
   const isTest = hasMeta(xml, 'tests')
   const count = isTest ? 0 : 1
   if (filtered.length > count) {
@@ -98,7 +98,7 @@ const transform = function(tojo, options, transformations, parser) {
 
 /**
  * Transpile XMIR to JavaScript.
- * @param {{foreign: String, project: String, resources: String}} options - Transpile command options
+ * @param {{foreign: string, project: string, resources: string}} options - Transpile command options
  */
 const transpile = function(options) {
   options = {...program.opts(), ...options}
@@ -116,7 +116,7 @@ const transpile = function(options) {
   const project = path.resolve(options['target'], options['project'])
   fs.mkdirSync(project, {recursive: true})
   JSON.parse(fs.readFileSync(foreign).toString())
-    .filter((tojo) => tojo.hasOwnProperty(verified))
+    .filter((tojo) => Object.hasOwn(tojo, verified))
     .forEach((tojo) => transform(
       tojo,
       {target: options['target'], project},

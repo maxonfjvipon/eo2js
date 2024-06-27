@@ -3,7 +3,7 @@ const bytesOf = require('./bytes-of');
 
 /**
  * Data to object converter.
- * @type {{BYTES: string, FLOAT: string, BOOL: string, STRING: string, INT: string, toObject: (function(string|boolean|number|BigInt|array.<string>|array.<number>): object)}}
+ * @type {{BYTES: string, FLOAT: string, BOOL: string, STRING: string, INT: string, toObject: (function(string|boolean|number|bigint|Array.<string>|Array.<number>): object)}}
  */
 const data = {
   toObject: function(data) {
